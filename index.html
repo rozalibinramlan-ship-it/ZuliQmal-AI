@@ -53,91 +53,23 @@
   .nota-content .contoh { background:rgba(212,175,55,0.1); border-left:4px solid #D4AF37; padding:12px; border-radius:8px; margin:10px 0; color:#e0e8f0; font-size:14px; }
   .nota-content .formula { background:rgba(212,175,55,0.15); border:2px dashed #D4AF37; padding:12px; border-radius:12px; text-align:center; font-weight:bold; color:#D4AF37; margin:12px 0; }
   .nota-content .langkah { background:rgba(212,175,55,0.08); border-left:4px solid #D4AF37; padding:10px 12px; border-radius:8px; margin:8px 0; color:#e0e8f0; font-size:14px; }
-  .soalan-box { background:rgba(255,255,255,0.05); border-radius:15px; padding:15px; margin-bottom:12px; border:1px solid rgba(212,175,55,0.3); }
-  .soalan-teks { color:#D4AF37; font-weight:bold; font-size:15px; margin-bottom:12px; }
-  .pilihan { background:linear-gradient(135deg,#0d2137,#1a3a5c); border:2px solid #4a6fa5; color:#e0e8f0; padding:12px 15px; border-radius:12px; margin-bottom:8px; cursor:pointer; font-weight:bold; font-size:14px; display:flex; align-items:center; gap:12px; }
+  .soalan-box { background:rgba(255,255,255,0.05); border-radius:15px; padding:20px; margin-bottom:12px; border:2px solid rgba(212,175,55,0.4); }
+  .soalan-teks { color:#D4AF37; font-weight:bold; font-size:17px; margin-bottom:15px; line-height:1.5; }
+  .pilihan { background:linear-gradient(135deg,#0d2137,#1a3a5c); border:2px solid #4a6fa5; color:#e0e8f0; padding:14px 16px; border-radius:12px; margin-bottom:10px; cursor:pointer; font-weight:bold; font-size:15px; display:flex; align-items:center; gap:12px; transition:0.2s; }
+  .pilihan:hover { border-color:#D4AF37; transform:translateX(5px); }
   .pilihan.betul { background:linear-gradient(135deg,#1e5631,#2e7d32); border-color:#4CAF50; color:#c8f7c5; }
   .pilihan.salah { background:linear-gradient(135deg,#7f1d1d,#c62828); border-color:#e53935; color:#ffcdd2; }
-  .pilihan .huruf { background:#D4AF37; color:#0a1929; min-width:28px; height:28px; line-height:28px; border-radius:50%; text-align:center; font-size:13px; }
+  .pilihan .huruf { background:#D4AF37; color:#0a1929; min-width:32px; height:32px; line-height:32px; border-radius:50%; text-align:center; font-size:14px; flex-shrink:0; }
   .pilihan.betul .huruf { background:#4CAF50; color:white; }
   .pilihan.salah .huruf { background:#e53935; color:white; }
-  .feedback { padding:12px; border-radius:10px; margin-top:10px; font-weight:bold; font-size:13px; display:none; }
+  .feedback { padding:14px; border-radius:10px; margin-top:12px; font-weight:bold; font-size:14px; display:none; }
   .feedback.show { display:block; }
   .feedback.ok { background:rgba(76,175,80,0.2); border:1px solid #4CAF50; color:#c8f7c5; }
   .feedback.no { background:rgba(229,57,53,0.2); border:1px solid #e53935; color:#ffcdd2; }
-  
-  /* VIDEO STYLE */
-  .video-wrapper { text-align:center; }
-  .video-player-box {
-    background:#000;
-    border-radius:15px;
-    overflow:hidden;
-    border:3px solid #D4AF37;
-    margin-bottom:15px;
-    box-shadow:0 0 30px rgba(212,175,55,0.3);
-  }
-  .video-player-box video {
-    width:100%;
-    display:block;
-    max-height:400px;
-    background:#000;
-  }
-  .video-placeholder {
-    text-align:center;
-    padding:40px 20px;
-    background:rgba(212,175,55,0.05);
-    border:2px dashed rgba(212,175,55,0.4);
-    border-radius:15px;
-  }
-  .video-placeholder .ikon-besar {
-    font-size:70px;
-    margin-bottom:15px;
-    display:block;
-    animation: floatY 2s infinite;
-  }
-  @keyframes floatY {
-    0%,100% { transform:translateY(0); }
-    50% { transform:translateY(-10px); }
-  }
-  .video-placeholder h3 {
-    color:#D4AF37;
-    margin-bottom:12px;
-    font-size:18px;
-  }
-  .video-placeholder p {
-    color:#8ba3c7;
-    font-size:13px;
-    line-height:1.7;
-    margin-bottom:10px;
-  }
-  .video-path-box {
-    display:inline-block;
-    background:rgba(212,175,55,0.15);
-    border:2px solid #D4AF37;
-    padding:10px 16px;
-    border-radius:10px;
-    margin:12px 0;
-    font-family:'Courier New',monospace;
-    font-size:12px;
-    color:#D4AF37;
-    font-weight:bold;
-  }
-  .video-info-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:10px;
-    margin-top:20px;
-  }
-  .video-info-item {
-    background:rgba(212,175,55,0.08);
-    border:1px solid rgba(212,175,55,0.3);
-    padding:10px;
-    border-radius:10px;
-    font-size:11px;
-    color:#8ba3c7;
-  }
-  .video-info-item b { color:#D4AF37; display:block; margin-bottom:4px; font-size:12px; }
-  
+  .info-video { text-align:center; padding:40px 20px; background:rgba(212,175,55,0.05); border:2px dashed rgba(212,175,55,0.3); border-radius:15px; }
+  .info-video .ikon { font-size:60px; margin-bottom:15px; }
+  .info-video h3 { color:#D4AF37; margin-bottom:10px; font-size:17px; }
+  .info-video p { color:#8ba3c7; font-size:13px; line-height:1.7; }
   @keyframes spin { to { transform: rotate(360deg); } }
   @media (max-width:600px) {
     .tajuk h1 { font-size:22px; }
@@ -299,18 +231,25 @@ var TOPIK = {
 var tahunSemasa = 1;
 var tabSemasa = 'buku';
 var topikSemasa = '';
-var sudahJawab = {};
 var subjekSemasaId = '';
 var cacheNota = {};
-var cacheLatihan = {};
 
-var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v9') || '{}');
+// Sistem latihan 100 soalan
+var semuaSoalan = [];
+var indeksSoalan = 0;
+var jumlahBetul = 0;
+var jumlahSalah = 0;
+var sudahJawab = {};
+var TARGET_SOALAN = 100;
+var sedangMuat = false;
+
+var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v10') || '{}');
 if (!dataPelajar.nama) dataPelajar.nama = 'IQmal';
 if (!dataPelajar.bintang) dataPelajar.bintang = 0;
 if (!dataPelajar.tahunDipilih) dataPelajar.tahunDipilih = 1;
 tahunSemasa = dataPelajar.tahunDipilih;
 
-function simpanData() { localStorage.setItem('iqmalAI_v9', JSON.stringify(dataPelajar)); }
+function simpanData() { localStorage.setItem('iqmalAI_v10', JSON.stringify(dataPelajar)); }
 
 function binaButangTahun() {
   var c = document.getElementById('tahunButtons');
@@ -359,260 +298,3 @@ function binaKotakSubjek(tahun) {
 
 function bukaSubjek(tahun, id) {
   subjekSemasaId = id;
-  tabSemasa = 'buku';
-  sudahJawab = {};
-  document.getElementById('page-menu').classList.remove('active');
-  document.getElementById('page-subjek').classList.add('active');
-  var subjek = NAMA_SUBJEK[id] || { nama: 'Subjek', emoji: '📚', info: '' };
-  document.getElementById('badgeTahun').textContent = 'TAHUN ' + tahun;
-  document.getElementById('namaSubjek').textContent = subjek.emoji + ' ' + subjek.nama;
-  document.getElementById('infoSubjek').textContent = '📚 ' + subjek.info;
-  document.title = subjek.nama + ' Tahun ' + tahun + ' - IQmal AI';
-  var tabs = document.querySelectorAll('.tab');
-  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
-  tabs[0].classList.add('active');
-  var senaraiTopik = (TOPIK[id] && TOPIK[id][tahun]) || [];
-  var topikContainer = document.getElementById('topikList');
-  topikContainer.innerHTML = '';
-  if (senaraiTopik.length === 0) {
-    topikContainer.innerHTML = '<p style="color:#8ba3c7;font-size:13px;">Topik akan datang.</p>';
-    document.getElementById('contentBox').innerHTML = '<div style="text-align:center;padding:40px;color:#8ba3c7;">📚 Topik belum disediakan.</div>';
-    return;
-  }
-  for (var j = 0; j < senaraiTopik.length; j++) {
-    (function(t, idx) {
-      var btn = document.createElement('button');
-      btn.className = 'topik-btn' + (idx === 0 ? ' active' : '');
-      btn.textContent = t;
-      btn.onclick = function() { pilihTopik(t, btn); };
-      topikContainer.appendChild(btn);
-    })(senaraiTopik[j], j);
-  }
-  topikSemasa = senaraiTopik[0];
-  paparKandungan(tahun);
-  window.scrollTo(0, 0);
-}
-
-function balikMenu() {
-  document.getElementById('page-subjek').classList.remove('active');
-  document.getElementById('page-menu').classList.add('active');
-  document.title = '👑 IQmal AI — EDISI PREMIUM';
-  window.scrollTo(0, 0);
-}
-
-function pilihTopik(topik, el) {
-  var bs = document.querySelectorAll('.topik-btn');
-  for (var i = 0; i < bs.length; i++) bs[i].classList.remove('active');
-  el.classList.add('active');
-  topikSemasa = topik;
-  sudahJawab = {};
-  paparKandungan(tahunSemasa);
-}
-
-function tukarTab(tab, el) {
-  var ts = document.querySelectorAll('.tab');
-  for (var i = 0; i < ts.length; i++) ts[i].classList.remove('active');
-  el.classList.add('active');
-  tabSemasa = tab;
-  paparKandungan(tahunSemasa);
-}
-
-function paparKandungan(tahun) {
-  var box = document.getElementById('contentBox');
-  var subjekNama = NAMA_SUBJEK[subjekSemasaId] ? NAMA_SUBJEK[subjekSemasaId].nama : subjekSemasaId;
-  if (tabSemasa === 'buku') janaNotaAI(box, tahun, subjekNama);
-  else if (tabSemasa === 'latihan') janaLatihanAI(box, tahun, subjekNama);
-  else if (tabSemasa === 'video') paparVideo(tahun);
-}
-
-async function janaNotaAI(box, tahun, subjekNama) {
-  var key = subjekSemasaId + '_' + tahun + '_' + topikSemasa;
-  if (cacheNota[key]) { box.innerHTML = '<div class="nota-content">' + cacheNota[key] + '</div>'; return; }
-  box.innerHTML = '<div style="text-align:center;padding:40px;color:#D4AF37;"><div style="display:inline-block;width:40px;height:40px;border:4px solid rgba(212,175,55,0.3);border-top-color:#D4AF37;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:15px;"></div><p style="font-weight:bold;">⏳ Cikgu AI sedang siapkan nota...</p><p style="color:#8ba3c7;font-size:12px;margin-top:8px;">Kali pertama lambat sikit (30-60 saat)</p></div>';
-  try {
-    var res = await fetch(BACKEND_URL + '/api/nota', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tahun: tahun, subjek: subjekNama, topik: topikSemasa })
-    });
-    var data = await res.json();
-    if (data.nota) {
-      cacheNota[key] = data.nota;
-      box.innerHTML = '<div class="nota-content">' + data.nota + '</div>';
-    } else {
-      box.innerHTML = '<div style="text-align:center;padding:40px;color:#ffcdd2;">❌ ' + (data.error || 'Ralat') + '<br><br><button onclick="paparKandungan(' + tahun + ')" style="margin-top:15px;padding:10px 20px;background:#D4AF37;color:#0a1929;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-family:inherit;">🔄 Cuba Lagi</button></div>';
-    }
-  } catch (err) {
-    box.innerHTML = '<div style="text-align:center;padding:40px;color:#ffcdd2;">❌ Ralat: ' + err.message + '<br><br><button onclick="paparKandungan(' + tahun + ')" style="margin-top:15px;padding:10px 20px;background:#D4AF37;color:#0a1929;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-family:inherit;">🔄 Cuba Lagi</button></div>';
-  }
-}
-
-async function janaLatihanAI(box, tahun, subjekNama) {
-  var key = subjekSemasaId + '_' + tahun + '_' + topikSemasa;
-  if (cacheLatihan[key]) { paparLatihan(cacheLatihan[key]); return; }
-  box.innerHTML = '<div style="text-align:center;padding:40px;color:#D4AF37;"><div style="display:inline-block;width:40px;height:40px;border:4px solid rgba(212,175,55,0.3);border-top-color:#D4AF37;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:15px;"></div><p style="font-weight:bold;">✏️ Cikgu AI sedang siapkan latihan...</p></div>';
-  try {
-    var res = await fetch(BACKEND_URL + '/api/latihan', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tahun: tahun, subjek: subjekNama, topik: topikSemasa })
-    });
-    var data = await res.json();
-    if (data.teks) {
-      var soalan = parseLatihan(data.teks);
-      if (soalan.length > 0) {
-        cacheLatihan[key] = soalan;
-        paparLatihan(soalan);
-      } else {
-        box.innerHTML = '<div style="text-align:center;padding:40px;color:#ffcdd2;">❌ AI tidak dapat jana latihan.<br><br><button onclick="paparKandungan(' + tahun + ')" style="margin-top:15px;padding:10px 20px;background:#D4AF37;color:#0a1929;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-family:inherit;">🔄 Cuba Lagi</button></div>';
-      }
-    } else {
-      box.innerHTML = '<div style="text-align:center;padding:40px;color:#ffcdd2;">❌ ' + (data.error || 'Ralat') + '<br><br><button onclick="paparKandungan(' + tahun + ')" style="margin-top:15px;padding:10px 20px;background:#D4AF37;color:#0a1929;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-family:inherit;">🔄 Cuba Lagi</button></div>';
-    }
-  } catch (err) {
-    box.innerHTML = '<div style="text-align:center;padding:40px;color:#ffcdd2;">❌ Ralat: ' + err.message + '<br><br><button onclick="paparKandungan(' + tahun + ')" style="margin-top:15px;padding:10px 20px;background:#D4AF37;color:#0a1929;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-family:inherit;">🔄 Cuba Lagi</button></div>';
-  }
-}
-
-function parseLatihan(teks) {
-  var soalan = [];
-  for (var i = 1; i <= 5; i++) {
-    var matchS = teks.match(new RegExp('SOALAN' + i + ':\\s*(.+)'));
-    if (matchS) {
-      var start = teks.indexOf('SOALAN' + i + ':');
-      var end = i < 5 ? teks.indexOf('SOALAN' + (i+1) + ':') : teks.length;
-      if (end === -1) end = teks.length;
-      var blok = teks.substring(start, end);
-      var a = blok.match(/A:\s*(.+)/);
-      var b = blok.match(/B:\s*(.+)/);
-      var c = blok.match(/C:\s*(.+)/);
-      var d = blok.match(/D:\s*(.+)/);
-      var j = blok.match(/JAWAPAN\d?:\s*([ABCD])/);
-      if (a && b && c && d && j) {
-        soalan.push({ s: matchS[1].trim(), A: a[1].trim(), B: b[1].trim(), C: c[1].trim(), D: d[1].trim(), j: j[1] });
-      }
-    }
-  }
-  return soalan;
-}
-
-function paparLatihan(soalan) {
-  var box = document.getElementById('contentBox');
-  var html = '<div style="text-align:center;color:#D4AF37;font-weight:bold;margin-bottom:15px;font-size:14px;">📝 ' + soalan.length + ' soalan • Tekan jawapan anda</div>';
-  for (var i = 0; i < soalan.length; i++) {
-    var s = soalan[i];
-    html += '<div class="soalan-box" id="soalan-' + i + '">';
-    html += '<div class="soalan-teks">' + (i+1) + '. ' + s.s + '</div>';
-    var hurufList = ['A', 'B', 'C', 'D'];
-    for (var k = 0; k < hurufList.length; k++) {
-      var h = hurufList[k];
-      html += '<div class="pilihan" onclick="jawab(' + i + ',\'' + h + '\')"><span class="huruf">' + h + '</span> ' + s[h] + '</div>';
-    }
-    html += '<div class="feedback" id="fb-' + i + '"></div></div>';
-  }
-  box.innerHTML = html;
-}
-
-function jawab(noSoalan, huruf) {
-  if (sudahJawab[noSoalan]) return;
-  sudahJawab[noSoalan] = true;
-  var key = subjekSemasaId + '_' + tahunSemasa + '_' + topikSemasa;
-  var soalan = cacheLatihan[key];
-  if (!soalan) return;
-  var data = soalan[noSoalan];
-  var box = document.getElementById('soalan-' + noSoalan);
-  var semuaPilihan = box.querySelectorAll('.pilihan');
-  var fb = document.getElementById('fb-' + noSoalan);
-  for (var i = 0; i < semuaPilihan.length; i++) {
-    var p = semuaPilihan[i];
-    p.style.pointerEvents = 'none';
-    var h = p.querySelector('.huruf').textContent;
-    if (h === data.j) p.classList.add('betul');
-    else if (h === huruf && huruf !== data.j) p.classList.add('salah');
-  }
-  if (huruf === data.j) { fb.className = 'feedback ok show'; fb.innerHTML = '✅ Betul! Hebat! 🎉'; }
-  else { fb.className = 'feedback no show'; fb.innerHTML = '❌ Belum betul. Jawapan: ' + data.j + ' (' + data[data.j] + ')'; }
-}
-
-/* ================== VIDEO (IMPROVED) ================== */
-function paparVideo(tahun) {
-  var box = document.getElementById('contentBox');
-  var namaTopik = topikSemasa.toLowerCase().replace(/ /g, '-').replace(/&/g, 'dan');
-  var videoPath = 'video/' + subjekSemasaId + '/' + namaTopik + '.mp4';
-  var namaSubjekDisplay = NAMA_SUBJEK[subjekSemasaId] ? NAMA_SUBJEK[subjekSemasaId].nama : subjekSemasaId;
-
-  // Papar placeholder dulu
-  box.innerHTML =
-    '<div class="video-placeholder">' +
-      '<span class="ikon-besar">🎬</span>' +
-      '<h3>Video: ' + topikSemasa + '</h3>' +
-      '<p>Video untuk topik ini <b>belum dimuatkan</b> lagi.</p>' +
-      '<p>Fail video perlu diletak di lokasi ini:</p>' +
-      '<div class="video-path-box">' + videoPath + '</div>' +
-      '<div class="video-info-grid">' +
-        '<div class="video-info-item"><b>📁 Folder</b>video/' + subjekSemasaId + '/</div>' +
-        '<div class="video-info-item"><b>📝 Nama fail</b>' + namaTopik + '.mp4</div>' +
-        '<div class="video-info-item"><b>🎯 Format</b>MP4 (H.264)</div>' +
-        '<div class="video-info-item"><b>📏 Saiz</b>Disyorkan &lt; 20MB</div>' +
-      '</div>' +
-      '<p style="margin-top:20px;color:#D4AF37;font-weight:bold;font-size:12px;">' +
-        '💡 Tip: Rakam video pendek (1-2 minit) ajar ' + topikSemasa +
-      '</p>' +
-    '</div>';
-
-  // Cuba test kalau video wujud
-  var testVideo = document.createElement('video');
-  testVideo.src = videoPath;
-  testVideo.onloadedmetadata = function() {
-    // Video wujud! Papar player
-    box.innerHTML =
-      '<div class="video-wrapper">' +
-        '<h3 style="color:#D4AF37;margin-bottom:15px;font-size:17px;">🎬 ' + topikSemasa + ' — ' + namaSubjekDisplay + ' Tahun ' + tahun + '</h3>' +
-        '<div class="video-player-box">' +
-          '<video controls playsinline preload="metadata">' +
-            '<source src="' + videoPath + '" type="video/mp4">' +
-            'Browser anda tidak menyokong video ini.' +
-          '</video>' +
-        '</div>' +
-        '<p style="color:#8ba3c7;font-size:12px;margin-top:10px;">' +
-          '💡 Lepas tengok video, cuba tab <b style="color:#D4AF37;">✏️ Latihan</b> ya!' +
-        '</p>' +
-      '</div>';
-  };
-  testVideo.onerror = function() {
-    // Video tak wujud — kekalkan placeholder
-  };
-}
-
-function tukarNama() {
-  var namaBaru = prompt('Siapa nama anda?', dataPelajar.nama);
-  if (namaBaru && namaBaru.trim()) {
-    dataPelajar.nama = namaBaru.trim();
-    simpanData();
-    document.getElementById('namaPelajar').textContent = namaBaru.trim();
-  }
-}
-
-function updatePangkat() {
-  var b = dataPelajar.bintang;
-  var pangkat, emoji, warna;
-  if (b >= 100) { pangkat = 'DIAMOND'; emoji = '💎'; warna = 'linear-gradient(135deg,#00CED1,#1E90FF)'; }
-  else if (b >= 50) { pangkat = 'GOLD'; emoji = '🥇'; warna = 'linear-gradient(135deg,#D4AF37,#B8860B)'; }
-  else if (b >= 20) { pangkat = 'SILVER'; emoji = '🥈'; warna = 'linear-gradient(135deg,#C0C0C0,#A9A9A9)'; }
-  else { pangkat = 'BRONZE'; emoji = '🥉'; warna = 'linear-gradient(135deg,#CD7F32,#8B4513)'; }
-  var el = document.getElementById('pangkatVIP');
-  if (el) { el.textContent = emoji + ' ' + pangkat + ' MEMBER'; el.style.background = warna; }
-}
-
-function init() {
-  document.getElementById('namaPelajar').textContent = dataPelajar.nama;
-  updatePangkat();
-  binaButangTahun();
-  binaKotakSubjek(tahunSemasa);
-}
-
-window.onload = init;
-</script>
-
-</body>
-</html>
