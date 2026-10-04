@@ -130,11 +130,7 @@
 </div>
 
 <script>
-// ============================================
-// URL BACKEND - DAH DISET UNTUK ANDA
-// ============================================
 var BACKEND_URL = 'https://zuliqmal.onrender.com';
-// ============================================
 
 var DATA = {
   "tahun1": [
@@ -239,13 +235,13 @@ var subjekSemasaId = '';
 var cacheNota = {};
 var cacheLatihan = {};
 
-var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v7') || '{}');
+var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v8') || '{}');
 if (!dataPelajar.nama) dataPelajar.nama = 'IQmal';
 if (!dataPelajar.bintang) dataPelajar.bintang = 0;
 if (!dataPelajar.tahunDipilih) dataPelajar.tahunDipilih = 1;
 tahunSemasa = dataPelajar.tahunDipilih;
 
-function simpanData() { localStorage.setItem('iqmalAI_v7', JSON.stringify(dataPelajar)); }
+function simpanData() { localStorage.setItem('iqmalAI_v8', JSON.stringify(dataPelajar)); }
 
 function binaButangTahun() {
   var c = document.getElementById('tahunButtons');
