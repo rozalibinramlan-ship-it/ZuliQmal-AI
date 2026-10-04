@@ -65,10 +65,79 @@
   .feedback.show { display:block; }
   .feedback.ok { background:rgba(76,175,80,0.2); border:1px solid #4CAF50; color:#c8f7c5; }
   .feedback.no { background:rgba(229,57,53,0.2); border:1px solid #e53935; color:#ffcdd2; }
-  .info-video { text-align:center; padding:40px 20px; background:rgba(212,175,55,0.05); border:2px dashed rgba(212,175,55,0.3); border-radius:15px; }
-  .info-video .ikon { font-size:60px; margin-bottom:15px; }
-  .info-video h3 { color:#D4AF37; margin-bottom:10px; font-size:17px; }
-  .info-video p { color:#8ba3c7; font-size:13px; line-height:1.7; }
+  
+  /* VIDEO STYLE */
+  .video-wrapper { text-align:center; }
+  .video-player-box {
+    background:#000;
+    border-radius:15px;
+    overflow:hidden;
+    border:3px solid #D4AF37;
+    margin-bottom:15px;
+    box-shadow:0 0 30px rgba(212,175,55,0.3);
+  }
+  .video-player-box video {
+    width:100%;
+    display:block;
+    max-height:400px;
+    background:#000;
+  }
+  .video-placeholder {
+    text-align:center;
+    padding:40px 20px;
+    background:rgba(212,175,55,0.05);
+    border:2px dashed rgba(212,175,55,0.4);
+    border-radius:15px;
+  }
+  .video-placeholder .ikon-besar {
+    font-size:70px;
+    margin-bottom:15px;
+    display:block;
+    animation: floatY 2s infinite;
+  }
+  @keyframes floatY {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-10px); }
+  }
+  .video-placeholder h3 {
+    color:#D4AF37;
+    margin-bottom:12px;
+    font-size:18px;
+  }
+  .video-placeholder p {
+    color:#8ba3c7;
+    font-size:13px;
+    line-height:1.7;
+    margin-bottom:10px;
+  }
+  .video-path-box {
+    display:inline-block;
+    background:rgba(212,175,55,0.15);
+    border:2px solid #D4AF37;
+    padding:10px 16px;
+    border-radius:10px;
+    margin:12px 0;
+    font-family:'Courier New',monospace;
+    font-size:12px;
+    color:#D4AF37;
+    font-weight:bold;
+  }
+  .video-info-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+    margin-top:20px;
+  }
+  .video-info-item {
+    background:rgba(212,175,55,0.08);
+    border:1px solid rgba(212,175,55,0.3);
+    padding:10px;
+    border-radius:10px;
+    font-size:11px;
+    color:#8ba3c7;
+  }
+  .video-info-item b { color:#D4AF37; display:block; margin-bottom:4px; font-size:12px; }
+  
   @keyframes spin { to { transform: rotate(360deg); } }
   @media (max-width:600px) {
     .tajuk h1 { font-size:22px; }
@@ -235,13 +304,13 @@ var subjekSemasaId = '';
 var cacheNota = {};
 var cacheLatihan = {};
 
-var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v8') || '{}');
+var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v9') || '{}');
 if (!dataPelajar.nama) dataPelajar.nama = 'IQmal';
 if (!dataPelajar.bintang) dataPelajar.bintang = 0;
 if (!dataPelajar.tahunDipilih) dataPelajar.tahunDipilih = 1;
 tahunSemasa = dataPelajar.tahunDipilih;
 
-function simpanData() { localStorage.setItem('iqmalAI_v8', JSON.stringify(dataPelajar)); }
+function simpanData() { localStorage.setItem('iqmalAI_v9', JSON.stringify(dataPelajar)); }
 
 function binaButangTahun() {
   var c = document.getElementById('tahunButtons');
@@ -465,15 +534,53 @@ function jawab(noSoalan, huruf) {
   else { fb.className = 'feedback no show'; fb.innerHTML = '❌ Belum betul. Jawapan: ' + data.j + ' (' + data[data.j] + ')'; }
 }
 
+/* ================== VIDEO (IMPROVED) ================== */
 function paparVideo(tahun) {
   var box = document.getElementById('contentBox');
   var namaTopik = topikSemasa.toLowerCase().replace(/ /g, '-').replace(/&/g, 'dan');
   var videoPath = 'video/' + subjekSemasaId + '/' + namaTopik + '.mp4';
-  box.innerHTML = '<div class="info-video"><div class="ikon">🎬</div><h3>Video: ' + topikSemasa + '</h3><p>Video untuk topik ini belum dimuatkan.</p><p style="color:#D4AF37;font-weight:bold;margin-top:15px;font-family:monospace;font-size:11px;">' + videoPath + '</p></div>';
+  var namaSubjekDisplay = NAMA_SUBJEK[subjekSemasaId] ? NAMA_SUBJEK[subjekSemasaId].nama : subjekSemasaId;
+
+  // Papar placeholder dulu
+  box.innerHTML =
+    '<div class="video-placeholder">' +
+      '<span class="ikon-besar">🎬</span>' +
+      '<h3>Video: ' + topikSemasa + '</h3>' +
+      '<p>Video untuk topik ini <b>belum dimuatkan</b> lagi.</p>' +
+      '<p>Fail video perlu diletak di lokasi ini:</p>' +
+      '<div class="video-path-box">' + videoPath + '</div>' +
+      '<div class="video-info-grid">' +
+        '<div class="video-info-item"><b>📁 Folder</b>video/' + subjekSemasaId + '/</div>' +
+        '<div class="video-info-item"><b>📝 Nama fail</b>' + namaTopik + '.mp4</div>' +
+        '<div class="video-info-item"><b>🎯 Format</b>MP4 (H.264)</div>' +
+        '<div class="video-info-item"><b>📏 Saiz</b>Disyorkan &lt; 20MB</div>' +
+      '</div>' +
+      '<p style="margin-top:20px;color:#D4AF37;font-weight:bold;font-size:12px;">' +
+        '💡 Tip: Rakam video pendek (1-2 minit) ajar ' + topikSemasa +
+      '</p>' +
+    '</div>';
+
+  // Cuba test kalau video wujud
   var testVideo = document.createElement('video');
   testVideo.src = videoPath;
   testVideo.onloadedmetadata = function() {
-    box.innerHTML = '<div style="background:#000;border-radius:15px;overflow:hidden;border:3px solid #D4AF37;margin-bottom:15px;"><video controls playsinline style="width:100%;display:block;max-height:400px;"><source src="' + videoPath + '" type="video/mp4"></video></div>';
+    // Video wujud! Papar player
+    box.innerHTML =
+      '<div class="video-wrapper">' +
+        '<h3 style="color:#D4AF37;margin-bottom:15px;font-size:17px;">🎬 ' + topikSemasa + ' — ' + namaSubjekDisplay + ' Tahun ' + tahun + '</h3>' +
+        '<div class="video-player-box">' +
+          '<video controls playsinline preload="metadata">' +
+            '<source src="' + videoPath + '" type="video/mp4">' +
+            'Browser anda tidak menyokong video ini.' +
+          '</video>' +
+        '</div>' +
+        '<p style="color:#8ba3c7;font-size:12px;margin-top:10px;">' +
+          '💡 Lepas tengok video, cuba tab <b style="color:#D4AF37;">✏️ Latihan</b> ya!' +
+        '</p>' +
+      '</div>';
+  };
+  testVideo.onerror = function() {
+    // Video tak wujud — kekalkan placeholder
   };
 }
 
