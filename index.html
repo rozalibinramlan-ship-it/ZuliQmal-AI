@@ -6,43 +6,267 @@
 <title>👑 IQmal AI — EDISI PREMIUM</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
-  body { background: linear-gradient(135deg,#0a1929 0%,#1a3a5c 50%,#0d2137 100%); min-height:100vh; padding:12px; overflow-x:hidden; }
-  .bintang { position:fixed; color:#FFD700; font-size:18px; animation:kelip 3s infinite; z-index:0; pointer-events:none; text-shadow:0 0 8px #FFD700; opacity:0.7; }
-  @keyframes kelip { 0%,100% { opacity:0.2; transform:scale(1); } 50% { opacity:0.8; transform:scale(1.3); } }
-  .container { max-width:950px; margin:auto; background:linear-gradient(135deg,#0d2137,#1a3a5c); border-radius:30px; padding:22px; box-shadow:0 0 0 3px #D4AF37,0 0 0 6px #8B6914,0 20px 60px rgba(0,0,0,0.6),0 0 80px rgba(212,175,55,0.15); position:relative; z-index:10; color:white; border:1px solid rgba(212,175,55,0.3); }
-  .mahkota { text-align:center; font-size:50px; animation:lompat 2s infinite; filter:drop-shadow(0 0 15px #D4AF37); }
-  @keyframes lompat { 0%,100% { transform:translateY(0) rotate(-5deg); } 50% { transform:translateY(-10px) rotate(5deg); } }
+  
+  body {
+    background: linear-gradient(135deg,#0a1929 0%,#1a3a5c 50%,#0d2137 100%);
+    min-height:100vh;
+    padding:12px;
+    color:white;
+    overflow-x:hidden;
+  }
+  
+  .bintang {
+    position:fixed; color:#FFD700; font-size:18px;
+    animation:kelip 3s infinite;
+    z-index:0; pointer-events:none;
+    text-shadow:0 0 8px #FFD700; opacity:0.7;
+  }
+  @keyframes kelip {
+    0%,100% { opacity:0.2; transform:scale(1); }
+    50% { opacity:0.8; transform:scale(1.3); }
+  }
+  
+  .container {
+    max-width:950px; margin:auto;
+    background:linear-gradient(135deg,#0d2137,#1a3a5c);
+    border-radius:30px; padding:22px;
+    box-shadow:0 0 0 3px #D4AF37,0 0 0 6px #8B6914,0 20px 60px rgba(0,0,0,0.6);
+    position:relative; z-index:10;
+  }
+  
+  .page { display:none; }
+  .page.active { display:block; }
+  
+  .mahkota {
+    text-align:center; font-size:50px;
+    animation:lompat 2s infinite;
+    filter:drop-shadow(0 0 15px #D4AF37);
+  }
+  @keyframes lompat {
+    0%,100% { transform:translateY(0) rotate(-5deg); }
+    50% { transform:translateY(-10px) rotate(5deg); }
+  }
+  
   .tajuk { text-align:center; margin-bottom:15px; }
-  .tajuk h1 { color:#D4AF37; font-size:28px; text-shadow:0 0 10px rgba(212,175,55,0.8),0 0 20px rgba(212,175,55,0.4); letter-spacing:2px; margin-bottom:4px; }
+  .tajuk h1 {
+    color:#D4AF37; font-size:28px;
+    text-shadow:0 0 10px rgba(212,175,55,0.8);
+    letter-spacing:2px; margin-bottom:4px;
+  }
   .tajuk .sub { color:#D4AF37; font-size:12px; letter-spacing:3px; opacity:0.8; }
-  .badge-premium { display:inline-block; background:linear-gradient(135deg,#D4AF37,#B8860B); color:#0a1929; padding:5px 16px; border-radius:20px; font-weight:bold; font-size:11px; letter-spacing:2px; box-shadow:0 0 15px rgba(212,175,55,0.5); margin-bottom:12px; animation:pulse 2s infinite; }
-  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
-  .kad-vip { background:linear-gradient(135deg,#1a3a5c,#0d2137); border:2px solid #D4AF37; border-radius:20px; padding:12px 18px; margin-bottom:15px; display:flex; align-items:center; gap:15px; box-shadow:0 0 20px rgba(212,175,55,0.2); }
-  .kad-vip .avatar { width:70px; height:70px; border-radius:50%; overflow:hidden; border:3px solid #D4AF37; box-shadow:0 0 15px rgba(212,175,55,0.6); flex-shrink:0; display:flex; align-items:center; justify-content:center; background:#0d2137; font-size:40px; }
+  
+  .badge-premium {
+    display:inline-block;
+    background:linear-gradient(135deg,#D4AF37,#B8860B);
+    color:#0a1929; padding:5px 16px;
+    border-radius:20px; font-weight:bold;
+    font-size:11px; letter-spacing:2px;
+    box-shadow:0 0 15px rgba(212,175,55,0.5);
+    margin-bottom:12px;
+  }
+  
+  .kad-vip {
+    background:linear-gradient(135deg,#1a3a5c,#0d2137);
+    border:2px solid #D4AF37; border-radius:20px;
+    padding:12px 18px; margin-bottom:15px;
+    display:flex; align-items:center; gap:15px;
+    box-shadow:0 0 20px rgba(212,175,55,0.2);
+  }
+  .kad-vip .avatar {
+    width:70px; height:70px; border-radius:50%;
+    overflow:hidden; border:3px solid #D4AF37;
+    box-shadow:0 0 15px rgba(212,175,55,0.6);
+    flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    background:#0d2137; font-size:40px;
+  }
   .kad-vip .avatar img { width:100%; height:100%; object-fit:cover; display:block; }
   .kad-vip .info { flex:1; }
   .kad-vip .label { color:#D4AF37; font-size:10px; letter-spacing:2px; font-weight:bold; }
-  .kad-vip .nama { color:white; font-size:22px; font-weight:bold; text-shadow:0 0 8px rgba(212,175,55,0.5); }
-  .kad-vip .pangkat { display:inline-block; background:linear-gradient(135deg,#CD7F32,#8B4513); color:white; padding:3px 12px; border-radius:10px; font-size:10px; font-weight:bold; margin-top:4px; }
-  .btn-tukar { background:linear-gradient(135deg,#D4AF37,#B8860B); color:#0a1929; border:none; padding:8px 12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:16px; font-family:inherit; }
-  .pilih-tahun { background:linear-gradient(135deg,#1a3a5c,#0d2137); border:2px solid #D4AF37; border-radius:20px; padding:15px; margin-bottom:20px; text-align:center; box-shadow:0 0 15px rgba(212,175,55,0.15); }
+  .kad-vip .nama { color:white; font-size:22px; font-weight:bold; }
+  .kad-vip .pangkat {
+    display:inline-block;
+    background:linear-gradient(135deg,#CD7F32,#8B4513);
+    color:white; padding:3px 12px;
+    border-radius:10px; font-size:10px; font-weight:bold; margin-top:4px;
+  }
+  .btn-tukar {
+    background:linear-gradient(135deg,#D4AF37,#B8860B);
+    color:#0a1929; border:none; padding:8px 12px;
+    border-radius:10px; font-weight:bold; cursor:pointer;
+    font-size:16px; font-family:inherit;
+  }
+  
+  .pilih-tahun {
+    background:linear-gradient(135deg,#1a3a5c,#0d2137);
+    border:2px solid #D4AF37; border-radius:20px;
+    padding:15px; margin-bottom:20px; text-align:center;
+  }
   .pilih-tahun p { color:#D4AF37; font-size:13px; font-weight:bold; letter-spacing:2px; margin-bottom:12px; }
   .tahun-buttons { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
-  .tahun-btn { background:linear-gradient(135deg,#0d2137,#1a3a5c); border:2px solid #4a6fa5; color:#8ba3c7; padding:10px 16px; border-radius:15px; font-weight:bold; font-size:14px; cursor:pointer; font-family:inherit; transition:0.2s; letter-spacing:1px; }
-  .tahun-btn:hover { border-color:#D4AF37; color:#D4AF37; transform:translateY(-2px); }
-  .tahun-btn.active { background:linear-gradient(135deg,#D4AF37,#B8860B); color:#0a1929; border-color:#D4AF37; box-shadow:0 0 20px rgba(212,175,55,0.6); }
-  .kotak-subjek { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px; margin-bottom:20px; }
-  .subjek-kotak { background:linear-gradient(135deg,#0d2137,#1a3a5c); border:3px solid; border-radius:22px; padding:20px 12px; text-align:center; cursor:pointer; transition:0.25s; text-decoration:none; color:white; display:flex; flex-direction:column; align-items:center; gap:8px; box-shadow:0 6px 0 rgba(0,0,0,0.4),0 0 15px rgba(212,175,55,0.15); position:relative; overflow:hidden; }
-  .subjek-kotak:hover { transform:translateY(-5px); box-shadow:0 10px 0 rgba(0,0,0,0.4),0 0 30px rgba(212,175,55,0.4); }
-  .subjek-kotak .emoji { font-size:48px; animation:lompat 3s infinite; }
-  .subjek-kotak .nama { font-size:14px; font-weight:bold; letter-spacing:1px; line-height:1.3; }
-  .subjek-kotak .info { color:#8ba3c7; font-size:10px; letter-spacing:1px; }
-  .subjek-kotak .badge-baru { position:absolute; top:8px; right:8px; background:linear-gradient(135deg,#FF1493,#C71585); color:white; font-size:9px; padding:2px 8px; border-radius:8px; font-weight:bold; letter-spacing:1px; animation:pulse 2s infinite; }
-  .mesej { background:linear-gradient(135deg,#1a3a5c,#0d2137); border:2px solid #D4AF37; border-radius:20px; padding:18px; text-align:center; box-shadow:0 0 20px rgba(212,175,55,0.15); }
-  .mesej .ikon { font-size:45px; margin-bottom:8px; filter:drop-shadow(0 0 10px #D4AF37); }
-  .mesej h3 { color:#D4AF37; font-size:16px; margin-bottom:8px; letter-spacing:1px; }
+  .tahun-btn {
+    background:linear-gradient(135deg,#0d2137,#1a3a5c);
+    border:2px solid #4a6fa5; color:#8ba3c7;
+    padding:10px 16px; border-radius:15px;
+    font-weight:bold; font-size:14px; cursor:pointer;
+    font-family:inherit; letter-spacing:1px;
+  }
+  .tahun-btn:hover { border-color:#D4AF37; color:#D4AF37; }
+  .tahun-btn.active {
+    background:linear-gradient(135deg,#D4AF37,#B8860B);
+    color:#0a1929; border-color:#D4AF37;
+    box-shadow:0 0 20px rgba(212,175,55,0.6);
+  }
+  
+  .kotak-subjek {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:14px; margin-bottom:20px;
+  }
+  .subjek-kotak {
+    background:linear-gradient(135deg,#0d2137,#1a3a5c);
+    border:3px solid; border-radius:22px;
+    padding:20px 12px; text-align:center;
+    cursor:pointer; color:white;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    box-shadow:0 6px 0 rgba(0,0,0,0.4);
+    position:relative;
+  }
+  .subjek-kotak:active { transform:translateY(3px); box-shadow:0 2px 0 rgba(0,0,0,0.4); }
+  .subjek-kotak .emoji { font-size:48px; }
+  .subjek-kotak .nama { font-size:14px; font-weight:bold; letter-spacing:1px; }
+  .subjek-kotak .info { color:#8ba3c7; font-size:10px; }
+  .subjek-kotak .badge-baru {
+    position:absolute; top:8px; right:8px;
+    background:linear-gradient(135deg,#FF1493,#C71585);
+    color:white; font-size:9px; padding:2px 8px;
+    border-radius:8px; font-weight:bold;
+  }
+  
+  .mesej {
+    background:linear-gradient(135deg,#1a3a5c,#0d2137);
+    border:2px solid #D4AF37; border-radius:20px;
+    padding:18px; text-align:center;
+  }
+  .mesej .ikon { font-size:45px; margin-bottom:8px; }
+  .mesej h3 { color:#D4AF37; font-size:16px; margin-bottom:8px; }
   .mesej p { color:#8ba3c7; font-size:12px; line-height:1.7; }
-  .mesej .highlight { color:#D4AF37; font-weight:bold; }
+  .highlight { color:#D4AF37; font-weight:bold; }
+  
+  /* SUBJEK PAGE */
+  .header-subjek {
+    display:flex; align-items:center; gap:15px;
+    margin-bottom:20px; padding-bottom:15px;
+    border-bottom:2px solid #D4AF37; flex-wrap:wrap;
+  }
+  .btn-back {
+    background:linear-gradient(135deg,#1a3a5c,#0d2137);
+    border:2px solid #D4AF37; color:#D4AF37;
+    padding:10px 15px; border-radius:15px;
+    font-weight:bold; font-size:14px; cursor:pointer;
+    font-family:inherit;
+  }
+  .info-subjek { flex:1; min-width:180px; }
+  .info-subjek .badge {
+    display:inline-block;
+    background:linear-gradient(135deg,#D4AF37,#B8860B);
+    color:#0a1929; padding:3px 12px;
+    border-radius:10px; font-size:11px; font-weight:bold; margin-bottom:5px;
+  }
+  .info-subjek h1 { color:#D4AF37; font-size:20px; }
+  .info-subjek p { color:#8ba3c7; font-size:12px; margin-top:3px; }
+  
+  .tabs { display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap; }
+  .tab {
+    flex:1; min-width:100px;
+    background:linear-gradient(135deg,#0d2137,#1a3a5c);
+    border:2px solid #4a6fa5; color:#8ba3c7;
+    padding:12px 10px; border-radius:15px;
+    font-weight:bold; font-size:13px; cursor:pointer;
+    font-family:inherit; text-align:center;
+  }
+  .tab.active {
+    background:linear-gradient(135deg,#D4AF37,#B8860B);
+    color:#0a1929; border-color:#D4AF37;
+  }
+  
+  .topik-list { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:15px; }
+  .topik-btn {
+    background:linear-gradient(135deg,#0d2137,#1a3a5c);
+    border:2px solid #4a6fa5; color:#8ba3c7;
+    padding:8px 14px; border-radius:12px;
+    font-weight:bold; font-size:12px; cursor:pointer; font-family:inherit;
+  }
+  .topik-btn.active {
+    background:linear-gradient(135deg,#D4AF37,#B8860B);
+    color:#0a1929; border-color:#D4AF37;
+  }
+  
+  .content-box {
+    background:linear-gradient(135deg,#1a3a5c,#0d2137);
+    border:2px solid #D4AF37; border-radius:20px;
+    padding:20px; min-height:300px;
+  }
+  
+  .nota-content h2 { color:#D4AF37; margin-bottom:12px; font-size:19px; }
+  .nota-content h3 { color:#D4AF37; margin:15px 0 8px; font-size:15px; border-left:4px solid #D4AF37; padding-left:10px; }
+  .nota-content p { line-height:1.8; color:#e0e8f0; margin-bottom:10px; font-size:14px; }
+  .nota-content .contoh {
+    background:rgba(212,175,55,0.1); border-left:4px solid #D4AF37;
+    padding:12px; border-radius:8px; margin:10px 0;
+    color:#e0e8f0; font-size:14px;
+  }
+  .nota-content .formula {
+    background:rgba(212,175,55,0.15); border:2px dashed #D4AF37;
+    padding:12px; border-radius:12px; text-align:center;
+    font-weight:bold; color:#D4AF37; margin:12px 0;
+  }
+  .nota-content .langkah {
+    background:rgba(212,175,55,0.08); border-left:4px solid #D4AF37;
+    padding:10px 12px; border-radius:8px; margin:8px 0;
+    color:#e0e8f0; font-size:14px;
+  }
+  
+  .soalan-box {
+    background:rgba(255,255,255,0.05); border-radius:15px;
+    padding:15px; margin-bottom:12px;
+    border:1px solid rgba(212,175,55,0.3);
+  }
+  .soalan-teks { color:#D4AF37; font-weight:bold; font-size:15px; margin-bottom:12px; }
+  .pilihan {
+    background:linear-gradient(135deg,#0d2137,#1a3a5c);
+    border:2px solid #4a6fa5; color:#e0e8f0;
+    padding:12px 15px; border-radius:12px; margin-bottom:8px;
+    cursor:pointer; font-weight:bold; font-size:14px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .pilihan:hover { border-color:#D4AF37; }
+  .pilihan.betul { background:linear-gradient(135deg,#1e5631,#2e7d32); border-color:#4CAF50; color:#c8f7c5; }
+  .pilihan.salah { background:linear-gradient(135deg,#7f1d1d,#c62828); border-color:#e53935; color:#ffcdd2; }
+  .pilihan .huruf {
+    background:#D4AF37; color:#0a1929;
+    min-width:28px; height:28px; line-height:28px;
+    border-radius:50%; text-align:center; font-size:13px;
+  }
+  .pilihan.betul .huruf { background:#4CAF50; color:white; }
+  .pilihan.salah .huruf { background:#e53935; color:white; }
+  
+  .feedback {
+    padding:12px; border-radius:10px; margin-top:10px;
+    font-weight:bold; font-size:13px; display:none;
+  }
+  .feedback.show { display:block; }
+  .feedback.ok { background:rgba(76,175,80,0.2); border:1px solid #4CAF50; color:#c8f7c5; }
+  .feedback.no { background:rgba(229,57,53,0.2); border:1px solid #e53935; color:#ffcdd2; }
+  
+  .info-video {
+    text-align:center; padding:40px 20px;
+    background:rgba(212,175,55,0.05);
+    border:2px dashed rgba(212,175,55,0.3);
+    border-radius:15px;
+  }
+  .info-video .ikon { font-size:60px; margin-bottom:15px; }
+  .info-video h3 { color:#D4AF37; margin-bottom:10px; font-size:17px; }
+  .info-video p { color:#8ba3c7; font-size:13px; line-height:1.7; }
+  
   @media (max-width:600px) {
     .tajuk h1 { font-size:22px; }
     .kotak-subjek { grid-template-columns:repeat(2,1fr); gap:10px; }
@@ -52,245 +276,519 @@
     .kad-vip .avatar { width:55px; height:55px; font-size:30px; }
     .kad-vip .nama { font-size:18px; }
     .tahun-btn { padding:8px 12px; font-size:12px; }
+    .info-subjek h1 { font-size:16px; }
+    .tab { padding:10px 6px; font-size:11px; min-width:70px; }
   }
 </style>
 </head>
 <body>
 
 <div class="bintang" style="top:5%; left:10%;">⭐</div>
-<div class="bintang" style="top:15%; left:80%; animation-delay:0.5s;">✨</div>
-<div class="bintang" style="top:50%; left:5%; animation-delay:1s;">⭐</div>
-<div class="bintang" style="top:75%; left:90%; animation-delay:1.5s;">✨</div>
+<div class="bintang" style="top:15%; left:80%;">✨</div>
+<div class="bintang" style="top:50%; left:5%;">⭐</div>
+<div class="bintang" style="top:75%; left:90%;">✨</div>
 
 <div class="container">
 
-  <div class="mahkota">👑</div>
-  
-  <div class="tajuk">
-    <div class="badge-premium">💎 EDISI PREMIUM VIP</div>
-    <h1>IQmal AI</h1>
-    <p class="sub">✦ TAHUN 1 — TAHUN 6 ✦</p>
-  </div>
-
-  <div class="kad-vip">
-    <div class="avatar" id="avatarVIP">
-      <img src="iqmal.jpg" alt="IQmal" onerror="this.style.display='none'; this.parentElement.innerHTML='🧒';">
+  <!-- ============ PAGE 1: MENU ============ -->
+  <div class="page active" id="page-menu">
+    <div class="mahkota">👑</div>
+    <div class="tajuk">
+      <div class="badge-premium">💎 EDISI PREMIUM VIP</div>
+      <h1>IQmal AI</h1>
+      <p class="sub">✦ TAHUN 1 — TAHUN 6 ✦</p>
     </div>
-    <div class="info">
-      <div class="label">👑 AHLI VIP</div>
-      <div class="nama" id="namaPelajar">IQmal</div>
-      <span class="pangkat" id="pangkatVIP">🥉 BRONZE MEMBER</span>
+
+    <div class="kad-vip">
+      <div class="avatar">
+        <img src="iqmal.jpg" alt="IQmal" onerror="this.style.display='none'; this.parentElement.innerHTML='🧒';">
+      </div>
+      <div class="info">
+        <div class="label">👑 AHLI VIP</div>
+        <div class="nama" id="namaPelajar">IQmal</div>
+        <span class="pangkat" id="pangkatVIP">🥉 BRONZE MEMBER</span>
+      </div>
+      <button class="btn-tukar" onclick="tukarNama()">✏️</button>
     </div>
-    <button class="btn-tukar" onclick="tukarNama()">✏️</button>
+
+    <div class="pilih-tahun">
+      <p>📅 PILIH TAHUN ANDA</p>
+      <div class="tahun-buttons" id="tahunButtons"></div>
+    </div>
+
+    <p style="color:#D4AF37;font-size:13px;font-weight:bold;letter-spacing:2px;text-align:center;margin-bottom:12px;">
+      👇 KLIK KOTAK SUBJEK 👇
+    </p>
+    <div class="kotak-subjek" id="kotakSubjek"></div>
+
+    <div class="mesej">
+      <div class="ikon">💎</div>
+      <h3>IQmal AHLI VIP ISTIMEWA</h3>
+      <p>Setiap kotak ada <span class="highlight">Buku Teks + Latihan + Video</span>.</p>
+      <p>Belajar ikut <span class="highlight">tahap tahun anda</span> ya! 🎯</p>
+    </div>
   </div>
 
-  <div class="pilih-tahun">
-    <p>📅 PILIH TAHUN ANDA</p>
-    <div class="tahun-buttons" id="tahunButtons"></div>
-  </div>
+  <!-- ============ PAGE 2: SUBJEK ============ -->
+  <div class="page" id="page-subjek">
+    <div class="header-subjek">
+      <button class="btn-back" onclick="balikMenu()">⬅️ Balik</button>
+      <div class="info-subjek">
+        <span class="badge" id="badgeTahun">TAHUN 1</span>
+        <h1 id="namaSubjek">Subjek</h1>
+        <p id="infoSubjek">📚 Buku Teks • Latihan • Video</p>
+      </div>
+    </div>
 
-  <p style="color:#D4AF37;font-size:13px;font-weight:bold;letter-spacing:2px;text-align:center;margin-bottom:12px;">
-    👇 KLIK KOTAK SUBJEK 👇
-  </p>
+    <div class="tabs">
+      <button class="tab active" onclick="tukarTab('buku', this)">📖 Buku Teks</button>
+      <button class="tab" onclick="tukarTab('latihan', this)">✏️ Latihan</button>
+      <button class="tab" onclick="tukarTab('video', this)">📹 Video</button>
+    </div>
 
-  <div class="kotak-subjek" id="kotakSubjek"></div>
-
-  <div class="mesej">
-    <div class="ikon">💎</div>
-    <h3><span id="namaMesej">IQmal</span> AHLI VIP ISTIMEWA</h3>
-    <p>Setiap kotak ada <span class="highlight">Buku Teks AI + Latihan AI + Video</span>.</p>
-    <p>Belajar ikut <span class="highlight">tahap tahun anda</span> ya! 🎯</p>
+    <div class="topik-list" id="topikList"></div>
+    <div class="content-box" id="contentBox"></div>
   </div>
 
 </div>
 
 <script>
-// ==========================================
-// KONFIGURASI
-// ==========================================
-var DATA_SUBJEK = null;
+// ================== DATA ==================
+var DATA = {
+  "tahun1": [
+    { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 1-100" },
+    { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Sukukata" },
+    { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "ABC, Colours" },
+    { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Anggota Badan" },
+    { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Rukun Islam" },
+    { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Warna" },
+    { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Irama" },
+    { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Pergerakan" }
+  ],
+  "tahun2": [
+    { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 1,000" },
+    { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Ayat Mudah" },
+    { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Numbers" },
+    { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Manusia" },
+    { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Solat" },
+    { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Bentuk" },
+    { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Melodi" },
+    { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Permainan" }
+  ],
+  "tahun3": [
+    { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 10,000" },
+    { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Karangan" },
+    { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Tenses" },
+    { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Tenaga" },
+    { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Ibadah" },
+    { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Kolaj" },
+    { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Notasi" },
+    { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Kecergasan" }
+  ],
+  "tahun4": [
+    { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 100,000", "badge": "BARU" },
+    { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Ringkasan" },
+    { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Writing" },
+    { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Fotosintesis" },
+    { "id": "sejarah", "nama": "Sejarah", "emoji": "📜", "warna": "#CD7F32", "info": "Melaka", "badge": "BARU" },
+    { "id": "rbt", "nama": "RBT", "emoji": "🛠️", "warna": "#D4AF37", "info": "Reka Bentuk", "badge": "BARU" },
+    { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Akidah" },
+    { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Catan" },
+    { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Lagu Rakyat" },
+    { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Sukan" }
+  ],
+  "tahun5": [
+    { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 1,000,000" },
+    { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Karangan" },
+    { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Literature" },
+    { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Sistem Badan" },
+    { "id": "sejarah", "nama": "Sejarah", "emoji": "📜", "warna": "#CD7F32", "info": "Kemerdekaan" },
+    { "id": "rbt", "nama": "RBT", "emoji": "🛠️", "warna": "#D4AF37", "info": "Projek" },
+    { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Ibadah" },
+    { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Arca" },
+    { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Lagu Tradisional" },
+    { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Sukan" }
+  ],
+  "tahun6": [
+    { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "UPSR", "badge": "UPSR" },
+    { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "UPSR", "badge": "UPSR" },
+    { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "UPSR", "badge": "UPSR" },
+    { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "UPSR", "badge": "UPSR" },
+    { "id": "sejarah", "nama": "Sejarah", "emoji": "📜", "warna": "#CD7F32", "info": "UPSR", "badge": "UPSR" },
+    { "id": "rbt", "nama": "RBT", "emoji": "🛠️", "warna": "#D4AF37", "info": "Projek" },
+    { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "UPSR", "badge": "UPSR" },
+    { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Projek" },
+    { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Projek" },
+    { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Sukan" }
+  ]
+};
 
-// ==========================================
-// DATA PELAJAR
-// ==========================================
-var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v2') || '{}');
+var NAMA_SUBJEK = {
+  matematik: { nama: 'Matematik', emoji: '🔢', info: 'Nombor & Kiraan' },
+  bm: { nama: 'Bahasa Melayu', emoji: '🇲🇾', info: 'Baca & Tulis' },
+  bi: { nama: 'Bahasa Inggeris', emoji: '🇬🇧', info: 'English' },
+  sains: { nama: 'Sains', emoji: '🔬', info: 'Alam Semulajadi' },
+  islam: { nama: 'Pendidikan Islam', emoji: '🕌', info: 'Agama' },
+  seni: { nama: 'Seni Visual', emoji: '🎨', info: 'Lukisan' },
+  muzik: { nama: 'Muzik', emoji: '🎵', info: 'Lagu' },
+  pjk: { nama: 'PJK', emoji: '⚽', info: 'Sukan' },
+  sejarah: { nama: 'Sejarah', emoji: '📜', info: 'Kenegaraan' },
+  rbt: { nama: 'RBT', emoji: '🛠️', info: 'Reka Bentuk' }
+};
+
+var TOPIK = {
+  matematik: { '1': ['Tambah','Tolak','Wang','Waktu'], '2': ['Tambah','Tolak','Darab'], '3': ['Tambah','Tolak','Darab','Bahagi'], '4': ['Pecahan','Perpuluhan'], '5': ['Pecahan','Peratus'], '6': ['Pecahan','Peratus'] },
+  bm: { '1': ['Sukukata','Vokal dan Konsonan'], '2': ['Ayat Mudah'], '3': ['Karangan'], '4': ['Karangan'], '5': ['Karangan'], '6': ['Karangan'] },
+  bi: { '1': ['Alphabet','Numbers'], '2': ['Numbers'], '3': ['Tenses'], '4': ['Grammar'], '5': ['Grammar'], '6': ['Grammar'] },
+  sains: { '1': ['Anggota Badan','Haiwan'], '2': ['Manusia'], '3': ['Tumbuhan'], '4': ['Fotosintesis'], '5': ['Sistem Badan'], '6': ['Teknologi'] },
+  islam: { '1': ['Rukun Islam','Wuduk'], '2': ['Solat'], '3': ['Ibadah'], '4': ['Akidah'], '5': ['Akidah'], '6': ['Akidah'] },
+  seni: { '1': ['Warna','Garisan'], '2': ['Bentuk'], '3': ['Kolaj'], '4': ['Lukisan'], '5': ['Catan'], '6': ['Projek'] },
+  muzik: { '1': ['Irama','Lagu Kanak-kanak'], '2': ['Melodi'], '3': ['Notasi'], '4': ['Alat Muzik'], '5': ['Lagu Tradisional'], '6': ['Projek'] },
+  pjk: { '1': ['Pergerakan Asas','Kebersihan'], '2': ['Permainan'], '3': ['Kecergasan'], '4': ['Kecergasan'], '5': ['Sukan'], '6': ['Sukan'] },
+  sejarah: { '4': ['Melaka'], '5': ['Kemerdekaan'], '6': ['Malaysia Moden'] },
+  rbt: { '4': ['Reka Bentuk'], '5': ['Projek'], '6': ['Projek'] }
+};
+
+// NOTA
+var NOTA = {};
+NOTA['matematik_1_Tambah'] = '<h2>➕ TAMBAH</h2><p>Tambah bermaksud <b>campur</b> dua nombor.</p><h3>📝 Cara Kira</h3><div class="langkah"><b>Langkah 1:</b> Tulis nombor menegak</div><div class="langkah"><b>Langkah 2:</b> Susun sa di bawah sa</div><div class="langkah"><b>Langkah 3:</b> Tambah dari kanan</div><div class="langkah"><b>Langkah 4:</b> Tulis jawapan</div><h3>✨ Contoh</h3><div class="contoh">5 + 3 = 8<br>12 + 7 = 19<br>25 + 13 = 38</div><h3>💡 Tip</h3><div class="formula">+ maksud TAMBAH<br>Bila tambah, nombor jadi LEBIH BESAR!</div>';
+NOTA['matematik_1_Tolak'] = '<h2>➖ TOLAK</h2><p>Tolak bermaksud <b>kurang</b> atau <b>ambil</b>.</p><h3>📝 Cara Kira</h3><div class="langkah"><b>Langkah 1:</b> Tulis nombor besar di atas</div><div class="langkah"><b>Langkah 2:</b> Tulis nombor kecil di bawah</div><div class="langkah"><b>Langkah 3:</b> Tolak dari kanan</div><h3>✨ Contoh</h3><div class="contoh">8 - 3 = 5<br>15 - 4 = 11<br>30 - 12 = 18</div><h3>💡 Tip</h3><div class="formula">- maksud TOLAK<br>Bila tolak, nombor jadi LEBIH KECIL!</div>';
+NOTA['matematik_1_Wang'] = '<h2>💰 WANG</h2><p>Wang Malaysia guna <b>Ringgit (RM)</b> dan <b>sen</b>.</p><h3>📝 Unit</h3><div class="langkah">RM1 = 100 sen</div><div class="langkah">50 sen = RM0.50</div><h3>✨ Contoh</h3><div class="contoh">RM2 + RM3 = RM5<br>RM10 - RM4 = RM6</div><h3>💡 Tip</h3><div class="formula">100 sen = RM1</div>';
+NOTA['matematik_1_Waktu'] = '<h2>⏰ WAKTU</h2><p>Waktu diukur dalam jam, minit, saat.</p><h3>📝 Unit</h3><div class="langkah">1 jam = 60 minit</div><div class="langkah">1 minit = 60 saat</div><div class="langkah">1 hari = 24 jam</div><h3>✨ Contoh</h3><div class="contoh">2 jam = 120 minit<br>Setengah jam = 30 minit</div>';
+NOTA['bm_1_Sukukata'] = '<h2>🔤 SUKUKATA</h2><p>Sukukata ialah bunyi yang membentuk perkataan.</p><h3>📝 Jenis</h3><div class="langkah"><b>KV</b> = ma, pa, tu</div><div class="langkah"><b>VK</b> = am, an</div><div class="langkah"><b>KVK</b> = mak, pak</div><div class="langkah"><b>KVKV</b> = ma-ma, bu-ku</div><h3>✨ Contoh</h3><div class="contoh">Bola = bo-la<br>Buku = bu-ku<br>Ikan = i-kan</div><h3>💡 Tip</h3><div class="formula">Tepuk tangan untuk kira sukukata!</div>';
+NOTA['bm_1_Vokal dan Konsonan'] = '<h2>🔠 VOKAL & KONSONAN</h2><h3>📝 Vokal (A E I O U)</h3><div class="contoh">A - Ibu Ayah<br>E - Emak<br>I - Ikan<br>O - Oren<br>U - Ubi</div><h3>📝 Konsonan</h3><p>Selain A E I O U</p><h3>💡 Tip</h3><div class="formula">Vokal = A E I O U</div>';
+NOTA['bi_1_Alphabet'] = '<h2>🅰️ ALPHABET</h2><p>English ada 26 huruf.</p><h3>📝 Huruf</h3><div class="contoh">A B C D E F G H I J K L M<br>N O P Q R S T U V W X Y Z</div><h3>💡 Tip</h3><div class="formula">ABC Song untuk hafal!</div>';
+NOTA['bi_1_Numbers'] = '<h2>🔢 NUMBERS</h2><h3>📝 1-10</h3><div class="contoh">One, Two, Three, Four, Five,<br>Six, Seven, Eight, Nine, Ten</div><h3>📝 11-20</h3><div class="contoh">Eleven, Twelve, Thirteen,<br>Fourteen, Fifteen, Sixteen,<br>Seventeen, Eighteen, Nineteen, Twenty</div>';
+NOTA['sains_1_Anggota Badan'] = '<h2>🧍 ANGGOTA BADAN</h2><h3>📝 Bahagian</h3><div class="langkah">👁️ <b>Mata</b> - melihat</div><div class="langkah">👂 <b>Telinga</b> - mendengar</div><div class="langkah">👃 <b>Hidung</b> - menghidu</div><div class="langkah">👄 <b>Mulut</b> - makan</div><div class="langkah">🖐️ <b>Tangan</b> - memegang</div><div class="langkah">🦶 <b>Kaki</b> - berjalan</div><h3>💡 Tip</h3><div class="formula">5 deria: lihat, dengar, hidu, rasa, sentuh</div>';
+NOTA['sains_1_Haiwan'] = '<h2>🐾 HAIWAN</h2><h3>📝 Jenis</h3><div class="langkah">🐕 <b>Peliharaan</b> - kucing, anjing</div><div class="langkah">🦁 <b>Liar</b> - singa, harimau</div><div class="langkah">🐔 <b>Ternakan</b> - ayam, lembu</div><div class="langkah">🐟 <b>Air</b> - ikan, penyu</div>';
+NOTA['islam_1_Rukun Islam'] = '<h2>🕌 RUKUN ISLAM</h2><p>Rukun Islam ada <b>5</b>.</p><h3>📝 5 Rukun</h3><div class="langkah"><b>1.</b> Syahadah</div><div class="langkah"><b>2.</b> Solat 5 waktu</div><div class="langkah"><b>3.</b> Puasa Ramadan</div><div class="langkah"><b>4.</b> Zakat</div><div class="langkah"><b>5.</b> Haji</div><h3>💡 Tip</h3><div class="formula">Syahadah - Solat - Puasa - Zakat - Haji</div>';
+NOTA['islam_1_Wuduk'] = '<h2>💧 WUDUK</h2><p>Wuduk ialah bersuci sebelum solat.</p><h3>📝 Cara</h3><div class="langkah"><b>1.</b> Niat</div><div class="langkah"><b>2.</b> Basuh tangan</div><div class="langkah"><b>3.</b> Berkumur</div><div class="langkah"><b>4.</b> Basuh muka</div><div class="langkah"><b>5.</b> Basuh tangan hingga siku</div><div class="langkah"><b>6.</b> Sapu kepala</div><div class="langkah"><b>7.</b> Basuh telinga</div><div class="langkah"><b>8.</b> Basuh kaki</div>';
+
+// LATIHAN
+var LATIHAN = {};
+LATIHAN['matematik_1_Tambah'] = [
+  { s: '3 + 4 = ?', A: '6', B: '7', C: '8', D: '9', j: 'B' },
+  { s: '5 + 2 = ?', A: '6', B: '7', C: '8', D: '9', j: 'B' },
+  { s: '6 + 3 = ?', A: '7', B: '8', C: '9', D: '10', j: 'C' },
+  { s: '8 + 1 = ?', A: '8', B: '9', C: '10', D: '11', j: 'B' },
+  { s: '7 + 5 = ?', A: '11', B: '12', C: '13', D: '14', j: 'B' }
+];
+LATIHAN['matematik_1_Tolak'] = [
+  { s: '8 - 3 = ?', A: '4', B: '5', C: '6', D: '7', j: 'B' },
+  { s: '10 - 4 = ?', A: '5', B: '6', C: '7', D: '8', j: 'B' },
+  { s: '15 - 5 = ?', A: '9', B: '10', C: '11', D: '12', j: 'B' },
+  { s: '12 - 7 = ?', A: '4', B: '5', C: '6', D: '7', j: 'B' },
+  { s: '20 - 8 = ?', A: '10', B: '11', C: '12', D: '13', j: 'C' }
+];
+LATIHAN['matematik_1_Wang'] = [
+  { s: 'RM2 + RM3 = ?', A: 'RM4', B: 'RM5', C: 'RM6', D: 'RM7', j: 'B' },
+  { s: 'RM10 - RM4 = ?', A: 'RM5', B: 'RM6', C: 'RM7', D: 'RM8', j: 'B' },
+  { s: '50 sen + 50 sen = ?', A: 'RM0.50', B: 'RM1', C: 'RM1.50', D: 'RM2', j: 'B' },
+  { s: 'RM5 + 50 sen = ?', A: 'RM5', B: 'RM5.50', C: 'RM6', D: 'RM6.50', j: 'B' },
+  { s: 'RM20 - RM15 = ?', A: 'RM3', B: 'RM4', C: 'RM5', D: 'RM6', j: 'C' }
+];
+LATIHAN['matematik_1_Waktu'] = [
+  { s: '1 jam = berapa minit?', A: '30', B: '50', C: '60', D: '100', j: 'C' },
+  { s: '2 jam = berapa minit?', A: '100', B: '110', C: '120', D: '130', j: 'C' },
+  { s: 'Setengah jam = ?', A: '20', B: '30', C: '40', D: '50', j: 'B' },
+  { s: '1 minit = berapa saat?', A: '30', B: '50', C: '60', D: '100', j: 'C' },
+  { s: '1 hari = berapa jam?', A: '12', B: '18', C: '24', D: '30', j: 'C' }
+];
+LATIHAN['bm_1_Sukukata'] = [
+  { s: 'Bola ada berapa sukukata?', A: '1', B: '2', C: '3', D: '4', j: 'B' },
+  { s: 'Buku ada berapa sukukata?', A: '1', B: '2', C: '3', D: '4', j: 'B' },
+  { s: 'Ikan ada berapa sukukata?', A: '1', B: '2', C: '3', D: '4', j: 'B' },
+  { s: 'KVKV bermaksud?', A: 'Vokal', B: 'Konsonan Vokal', C: 'Konsonan Vokal Konsonan Vokal', D: 'Vokal Konsonan', j: 'C' },
+  { s: 'Pilih KVKV:', A: 'Mak', B: 'Bapa', C: 'Kucing', D: 'Meja', j: 'B' }
+];
+LATIHAN['bm_1_Vokal dan Konsonan'] = [
+  { s: 'Berapa vokal?', A: '3', B: '4', C: '5', D: '6', j: 'C' },
+  { s: 'Huruf A ialah?', A: 'Vokal', B: 'Konsonan', C: 'Nombor', D: 'Simbol', j: 'A' },
+  { s: 'Huruf B ialah?', A: 'Vokal', B: 'Konsonan', C: 'Nombor', D: 'Simbol', j: 'B' },
+  { s: 'Pilih vokal:', A: 'K', B: 'M', C: 'A', D: 'T', j: 'C' },
+  { s: 'Pilih konsonan:', A: 'A', B: 'E', C: 'I', D: 'K', j: 'D' }
+];
+LATIHAN['bi_1_Alphabet'] = [
+  { s: 'How many letters?', A: '24', B: '25', C: '26', D: '27', j: 'C' },
+  { s: 'After A?', A: 'B', B: 'C', C: 'D', D: 'E', j: 'A' },
+  { s: 'Last letter?', A: 'X', B: 'Y', C: 'Z', D: 'W', j: 'C' },
+  { s: 'Before M?', A: 'K', B: 'L', C: 'N', D: 'O', j: 'B' },
+  { s: 'How many vowels?', A: '3', B: '4', C: '5', D: '6', j: 'C' }
+];
+LATIHAN['bi_1_Numbers'] = [
+  { s: '5 in English?', A: 'Four', B: 'Five', C: 'Six', D: 'Seven', j: 'B' },
+  { s: '"Tiga" in English?', A: 'Two', B: 'Three', C: 'Four', D: 'Five', j: 'B' },
+  { s: 'After Ten?', A: 'Nine', B: 'Eleven', C: 'Twelve', D: 'Twenty', j: 'B' },
+  { s: '20 in English?', A: 'Twelve', B: 'Twenty', C: 'Two', D: 'Ten', j: 'B' },
+  { s: 'Spell 8?', A: 'Eit', B: 'Ate', C: 'Eight', D: 'Aight', j: 'C' }
+];
+LATIHAN['sains_1_Anggota Badan'] = [
+  { s: 'Melihat guna?', A: 'Telinga', B: 'Mata', C: 'Hidung', D: 'Mulut', j: 'B' },
+  { s: 'Mendengar guna?', A: 'Mata', B: 'Telinga', C: 'Hidung', D: 'Mulut', j: 'B' },
+  { s: 'Menghidu guna?', A: 'Telinga', B: 'Hidung', C: 'Mata', D: 'Kaki', j: 'B' },
+  { s: 'Berjalan guna?', A: 'Tangan', B: 'Kaki', C: 'Kepala', D: 'Mata', j: 'B' },
+  { s: 'Berapa deria?', A: '3', B: '4', C: '5', D: '6', j: 'C' }
+];
+LATIHAN['sains_1_Haiwan'] = [
+  { s: 'Kucing?', A: 'Liar', B: 'Peliharaan', C: 'Ternakan', D: 'Air', j: 'B' },
+  { s: 'Singa?', A: 'Peliharaan', B: 'Liar', C: 'Ternakan', D: 'Air', j: 'B' },
+  { s: 'Ikan hidup di?', A: 'Darat', B: 'Udara', C: 'Air', D: 'Pokok', j: 'C' },
+  { s: 'Ayam?', A: 'Ternakan', B: 'Liar', C: 'Air', D: 'Peliharaan', j: 'A' },
+  { s: 'Haiwan perlu?', A: 'Makan', B: 'Tidur', C: 'Main', D: 'Lari', j: 'A' }
+];
+LATIHAN['islam_1_Rukun Islam'] = [
+  { s: 'Rukun Islam ada?', A: '3', B: '4', C: '5', D: '6', j: 'C' },
+  { s: 'Rukun pertama?', A: 'Solat', B: 'Syahadah', C: 'Puasa', D: 'Zakat', j: 'B' },
+  { s: 'Solat sehari?', A: '3', B: '4', C: '5', D: '6', j: 'C' },
+  { s: 'Puasa di bulan?', A: 'Syawal', B: 'Ramadan', C: 'Rajab', D: 'Muharram', j: 'B' },
+  { s: 'Haji di?', A: 'Madinah', B: 'Mekah', C: 'Malaysia', D: 'Mesir', j: 'B' }
+];
+LATIHAN['islam_1_Wuduk'] = [
+  { s: 'Wuduk ialah?', A: 'Makan', B: 'Bersuci', C: 'Tidur', D: 'Main', j: 'B' },
+  { s: 'Sebelum wuduk?', A: 'Niat', B: 'Tidur', C: 'Makan', D: 'Lari', j: 'A' },
+  { s: 'Selepas berkumur?', A: 'Basuh kaki', B: 'Basuh muka', C: 'Sapu kepala', D: 'Basuh tangan', j: 'B' },
+  { s: 'Wuduk untuk?', A: 'Solat', B: 'Tidur', C: 'Main', D: 'Makan', j: 'A' },
+  { s: 'Basuh kaki langkah?', A: 'Pertama', B: 'Terakhir', C: 'Tengah', D: 'Kedua', j: 'B' }
+];
+
+// ================== STATE ==================
+var tahunSemasa = 1;
+var tabSemasa = 'buku';
+var topikSemasa = '';
+var sudahJawab = {};
+var subjekSemasaId = '';
+
+var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v3') || '{}');
 if (!dataPelajar.nama) dataPelajar.nama = 'IQmal';
 if (!dataPelajar.bintang) dataPelajar.bintang = 0;
 if (!dataPelajar.tahunDipilih) dataPelajar.tahunDipilih = 1;
+tahunSemasa = dataPelajar.tahunDipilih;
 
-function simpanData() {
-  localStorage.setItem('iqmalAI_v2', JSON.stringify(dataPelajar));
+function simpanData() { localStorage.setItem('iqmalAI_v3', JSON.stringify(dataPelajar)); }
+
+// ================== MENU ==================
+function binaButangTahun() {
+  var c = document.getElementById('tahunButtons');
+  c.innerHTML = '';
+  for (var i = 1; i <= 6; i++) {
+    (function(n) {
+      var btn = document.createElement('button');
+      btn.className = 'tahun-btn' + (n === tahunSemasa ? ' active' : '');
+      btn.textContent = '🎒 TAHUN ' + n;
+      btn.onclick = function() { pilihTahun(n, btn); };
+      c.appendChild(btn);
+    })(i);
+  }
 }
 
-// ==========================================
-// TUKAR NAMA
-// ==========================================
+function pilihTahun(tahun, el) {
+  var bs = document.querySelectorAll('.tahun-btn');
+  for (var i = 0; i < bs.length; i++) bs[i].classList.remove('active');
+  el.classList.add('active');
+  tahunSemasa = tahun;
+  dataPelajar.tahunDipilih = tahun;
+  simpanData();
+  binaKotakSubjek(tahun);
+}
+
+function binaKotakSubjek(tahun) {
+  var container = document.getElementById('kotakSubjek');
+  var senarai = DATA['tahun' + tahun] || [];
+  container.innerHTML = '';
+  
+  for (var i = 0; i < senarai.length; i++) {
+    (function(s) {
+      var a = document.createElement('div');
+      a.className = 'subjek-kotak';
+      a.style.borderColor = s.warna;
+      var html = '';
+      if (s.badge) html += '<span class="badge-baru">' + s.badge + '</span>';
+      html += '<div class="emoji">' + s.emoji + '</div>';
+      html += '<div class="nama" style="color:' + s.warna + '">' + s.nama + '</div>';
+      html += '<div class="info">' + s.info + '</div>';
+      a.innerHTML = html;
+      a.onclick = function() { bukaSubjek(tahun, s.id); };
+      container.appendChild(a);
+    })(senarai[i]);
+  }
+}
+
+// ================== TUKAR PAGE ==================
+function bukaSubjek(tahun, id) {
+  subjekSemasaId = id;
+  tabSemasa = 'buku';
+  sudahJawab = {};
+  
+  // Hide menu, show subjek
+  document.getElementById('page-menu').classList.remove('active');
+  document.getElementById('page-subjek').classList.add('active');
+  
+  // Setup header
+  var subjek = NAMA_SUBJEK[id] || { nama: 'Subjek', emoji: '📚', info: '' };
+  document.getElementById('badgeTahun').textContent = 'TAHUN ' + tahun;
+  document.getElementById('namaSubjek').textContent = subjek.emoji + ' ' + subjek.nama;
+  document.getElementById('infoSubjek').textContent = '📚 ' + subjek.info;
+  document.title = subjek.nama + ' Tahun ' + tahun + ' - IQmal AI';
+  
+  // Reset tabs
+  var tabs = document.querySelectorAll('.tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  tabs[0].classList.add('active');
+  
+  // Bina topik
+  var senaraiTopik = (TOPIK[id] && TOPIK[id][tahun]) || [];
+  var topikContainer = document.getElementById('topikList');
+  topikContainer.innerHTML = '';
+  
+  if (senaraiTopik.length === 0) {
+    topikContainer.innerHTML = '<p style="color:#8ba3c7;font-size:13px;">Topik akan datang.</p>';
+    document.getElementById('contentBox').innerHTML = '<div style="text-align:center;padding:40px;color:#8ba3c7;">📚 Topik untuk subjek ini belum disediakan.</div>';
+    return;
+  }
+  
+  for (var j = 0; j < senaraiTopik.length; j++) {
+    (function(t, idx) {
+      var btn = document.createElement('button');
+      btn.className = 'topik-btn' + (idx === 0 ? ' active' : '');
+      btn.textContent = t;
+      btn.onclick = function() { pilihTopik(t, btn); };
+      topikContainer.appendChild(btn);
+    })(senaraiTopik[j], j);
+  }
+  
+  topikSemasa = senaraiTopik[0];
+  paparKandungan(tahun);
+  
+  window.scrollTo(0, 0);
+}
+
+function balikMenu() {
+  document.getElementById('page-subjek').classList.remove('active');
+  document.getElementById('page-menu').classList.add('active');
+  document.title = '👑 IQmal AI — EDISI PREMIUM';
+  window.scrollTo(0, 0);
+}
+
+function pilihTopik(topik, el) {
+  var bs = document.querySelectorAll('.topik-btn');
+  for (var i = 0; i < bs.length; i++) bs[i].classList.remove('active');
+  el.classList.add('active');
+  topikSemasa = topik;
+  sudahJawab = {};
+  paparKandungan(tahunSemasa);
+}
+
+function tukarTab(tab, el) {
+  var ts = document.querySelectorAll('.tab');
+  for (var i = 0; i < ts.length; i++) ts[i].classList.remove('active');
+  el.classList.add('active');
+  tabSemasa = tab;
+  paparKandungan(tahunSemasa);
+}
+
+// ================== KANDUNGAN ==================
+function paparKandungan(tahun) {
+  var box = document.getElementById('contentBox');
+  var key = subjekSemasaId + '_' + tahun + '_' + topikSemasa;
+  
+  if (tabSemasa === 'buku') {
+    var nota = NOTA[key];
+    if (nota) {
+      box.innerHTML = '<div class="nota-content">' + nota + '</div>';
+    } else {
+      box.innerHTML = '<div class="nota-content"><h2>📚 ' + topikSemasa + '</h2><p>Nota untuk topik ini sedang disediakan.</p><div class="contoh">💡 Cikgu akan tambah nota tidak lama lagi!</div></div>';
+    }
+  }
+  else if (tabSemasa === 'latihan') {
+    var soalan = LATIHAN[key];
+    if (soalan) paparLatihan(soalan);
+    else box.innerHTML = '<div style="text-align:center;padding:40px;color:#8ba3c7;">✏️ Latihan untuk topik ini akan datang.</div>';
+  }
+  else if (tabSemasa === 'video') {
+    paparVideo(tahun);
+  }
+}
+
+function paparLatihan(soalan) {
+  var box = document.getElementById('contentBox');
+  var html = '<div style="text-align:center;color:#D4AF37;font-weight:bold;margin-bottom:15px;font-size:14px;">📝 ' + soalan.length + ' soalan • Tekan jawapan anda</div>';
+  
+  for (var i = 0; i < soalan.length; i++) {
+    var s = soalan[i];
+    html += '<div class="soalan-box" id="soalan-' + i + '">';
+    html += '<div class="soalan-teks">' + (i+1) + '. ' + s.s + '</div>';
+    var hurufList = ['A', 'B', 'C', 'D'];
+    for (var k = 0; k < hurufList.length; k++) {
+      var h = hurufList[k];
+      html += '<div class="pilihan" onclick="jawab(' + i + ',\'' + h + '\')">';
+      html += '<span class="huruf">' + h + '</span> ' + s[h];
+      html += '</div>';
+    }
+    html += '<div class="feedback" id="fb-' + i + '"></div></div>';
+  }
+  box.innerHTML = html;
+}
+
+function jawab(noSoalan, huruf) {
+  if (sudahJawab[noSoalan]) return;
+  sudahJawab[noSoalan] = true;
+  var key = subjekSemasaId + '_' + tahunSemasa + '_' + topikSemasa;
+  var soalan = LATIHAN[key];
+  if (!soalan) return;
+  var data = soalan[noSoalan];
+  var box = document.getElementById('soalan-' + noSoalan);
+  var semuaPilihan = box.querySelectorAll('.pilihan');
+  var fb = document.getElementById('fb-' + noSoalan);
+  
+  for (var i = 0; i < semuaPilihan.length; i++) {
+    var p = semuaPilihan[i];
+    p.style.pointerEvents = 'none';
+    var h = p.querySelector('.huruf').textContent;
+    if (h === data.j) p.classList.add('betul');
+    else if (h === huruf && huruf !== data.j) p.classList.add('salah');
+  }
+  
+  if (huruf === data.j) {
+    fb.className = 'feedback ok show';
+    fb.innerHTML = '✅ Betul! Hebat! 🎉';
+  } else {
+    fb.className = 'feedback no show';
+    fb.innerHTML = '❌ Belum betul. Jawapan: ' + data.j + ' (' + data[data.j] + ')';
+  }
+}
+
+function paparVideo(tahun) {
+  var box = document.getElementById('contentBox');
+  var namaTopik = topikSemasa.toLowerCase().replace(/ /g, '-').replace(/&/g, 'dan');
+  var videoPath = 'video/' + subjekSemasaId + '/' + namaTopik + '.mp4';
+  
+  box.innerHTML = '<div class="info-video"><div class="ikon">🎬</div><h3>Video: ' + topikSemasa + '</h3><p>Video untuk topik ini belum dimuatkan.</p><p style="color:#D4AF37;font-weight:bold;margin-top:15px;font-family:monospace;font-size:11px;">' + videoPath + '</p><p style="margin-top:15px;font-size:12px;">📁 Letak fail video dalam folder:<br><b style="color:#D4AF37;">video/' + subjekSemasaId + '/</b></p></div>';
+  
+  var testVideo = document.createElement('video');
+  testVideo.src = videoPath;
+  testVideo.onloadedmetadata = function() {
+    box.innerHTML = '<div style="background:#000;border-radius:15px;overflow:hidden;border:3px solid #D4AF37;margin-bottom:15px;"><video controls playsinline style="width:100%;display:block;max-height:400px;"><source src="' + videoPath + '" type="video/mp4"></video></div><p style="text-align:center;color:#D4AF37;font-weight:bold;">🎬 ' + topikSemasa + ' - Tahun ' + tahun + '</p>';
+  };
+}
+
+// ================== TUKAR NAMA ==================
 function tukarNama() {
   var namaBaru = prompt('Siapa nama anda?', dataPelajar.nama);
   if (namaBaru && namaBaru.trim()) {
     dataPelajar.nama = namaBaru.trim();
     simpanData();
     document.getElementById('namaPelajar').textContent = namaBaru.trim();
-    document.getElementById('namaMesej').textContent = namaBaru.trim();
-    alert('✅ Nama ditukar jadi: ' + namaBaru.trim());
   }
 }
 
-// ==========================================
-// MUAT DATA JSON
-// ==========================================
-async function muatData() {
-  try {
-    var res = await fetch('data.json');
-    var json = await res.json();
-    DATA_SUBJEK = json.subjek;
-    return true;
-  } catch (err) {
-    // Fallback: data terbina dalam
-    DATA_SUBJEK = {
-      "tahun1": [
-        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 1-100" },
-        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Sukukata" },
-        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "ABC, Colours" },
-        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Anggota Badan" },
-        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Rukun Islam" },
-        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Warna" },
-        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Irama" },
-        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Pergerakan" }
-      ],
-      "tahun2": [
-        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 1,000" },
-        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Ayat Mudah" },
-        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Numbers" },
-        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Manusia" },
-        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Solat" },
-        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Bentuk" },
-        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Melodi" },
-        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Permainan" }
-      ],
-      "tahun3": [
-        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 10,000" },
-        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Karangan" },
-        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Tenses" },
-        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Tenaga" },
-        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Ibadah" },
-        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Kolaj" },
-        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Notasi" },
-        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Kecergasan" }
-      ],
-      "tahun4": [
-        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 100,000", "badge": "BARU" },
-        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Ringkasan" },
-        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Writing" },
-        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Fotosintesis" },
-        { "id": "sejarah", "nama": "Sejarah", "emoji": "📜", "warna": "#CD7F32", "info": "Melaka", "badge": "BARU" },
-        { "id": "rbt", "nama": "RBT", "emoji": "🛠️", "warna": "#D4AF37", "info": "Reka Bentuk", "badge": "BARU" },
-        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Akidah" },
-        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Catan" },
-        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Lagu Rakyat" },
-        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Sukan" }
-      ],
-      "tahun5": [
-        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 1,000,000" },
-        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Karangan" },
-        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Literature" },
-        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Sistem Badan" },
-        { "id": "sejarah", "nama": "Sejarah", "emoji": "📜", "warna": "#CD7F32", "info": "Kemerdekaan" },
-        { "id": "rbt", "nama": "RBT", "emoji": "🛠️", "warna": "#D4AF37", "info": "Projek" },
-        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Ibadah" },
-        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Arca" },
-        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Lagu Tradisional" },
-        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Sukan" }
-      ],
-      "tahun6": [
-        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "UPSR", "badge": "UPSR" },
-        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "UPSR", "badge": "UPSR" },
-        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "UPSR", "badge": "UPSR" },
-        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "UPSR", "badge": "UPSR" },
-        { "id": "sejarah", "nama": "Sejarah", "emoji": "📜", "warna": "#CD7F32", "info": "UPSR", "badge": "UPSR" },
-        { "id": "rbt", "nama": "RBT", "emoji": "🛠️", "warna": "#D4AF37", "info": "Projek" },
-        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "UPSR", "badge": "UPSR" },
-        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Projek" },
-        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Projek" },
-        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Sukan" }
-      ]
-    };
-    return true;
-  }
-}
-
-// ==========================================
-// BINA BUTANG TAHUN
-// ==========================================
-function binaButangTahun() {
-  var container = document.getElementById('tahunButtons');
-  container.innerHTML = '';
-  
-  for (var i = 1; i <= 6; i++) {
-    (function(nombor) {
-      var btn = document.createElement('button');
-      btn.className = 'tahun-btn' + (nombor === dataPelajar.tahunDipilih ? ' active' : '');
-      btn.textContent = '🎒 TAHUN ' + nombor;
-      btn.onclick = function() { pilihTahun(nombor, btn); };
-      container.appendChild(btn);
-    })(i);
-  }
-}
-
-// ==========================================
-// PILIH TAHUN
-// ==========================================
-function pilihTahun(tahun, el) {
-  var buttons = document.querySelectorAll('.tahun-btn');
-  for (var i = 0; i < buttons.length; i++) buttons[i].classList.remove('active');
-  el.classList.add('active');
-  dataPelajar.tahunDipilih = tahun;
-  simpanData();
-  binaKotakSubjek(tahun);
-}
-
-// ==========================================
-// BINA KOTAK SUBJEK
-// ==========================================
-function binaKotakSubjek(tahun) {
-  var container = document.getElementById('kotakSubjek');
-  var key = 'tahun' + tahun;
-  var senarai = (DATA_SUBJEK && DATA_SUBJEK[key]) || [];
-  
-  container.innerHTML = '';
-  
-  for (var i = 0; i < senarai.length; i++) {
-    var s = senarai[i];
-    var a = document.createElement('a');
-    a.href = 'subjek.html?tahun=' + tahun + '&id=' + s.id;
-    a.className = 'subjek-kotak';
-    a.style.borderColor = s.warna;
-    
-    var html = '';
-    if (s.badge) {
-      html += '<span class="badge-baru">' + s.badge + '</span>';
-    }
-    html += '<div class="emoji">' + s.emoji + '</div>';
-    html += '<div class="nama" style="color:' + s.warna + '">' + s.nama + '</div>';
-    html += '<div class="info">' + s.info + '</div>';
-    
-    a.innerHTML = html;
-    container.appendChild(a);
-  }
-}
-
-// ==========================================
-// PANGKAT
-// ==========================================
+// ================== PANGKAT ==================
 function updatePangkat() {
   var b = dataPelajar.bintang;
   var pangkat, emoji, warna;
-  
   if (b >= 100) { pangkat = 'DIAMOND'; emoji = '💎'; warna = 'linear-gradient(135deg,#00CED1,#1E90FF)'; }
   else if (b >= 50) { pangkat = 'GOLD'; emoji = '🥇'; warna = 'linear-gradient(135deg,#D4AF37,#B8860B)'; }
   else if (b >= 20) { pangkat = 'SILVER'; emoji = '🥈'; warna = 'linear-gradient(135deg,#C0C0C0,#A9A9A9)'; }
   else { pangkat = 'BRONZE'; emoji = '🥉'; warna = 'linear-gradient(135deg,#CD7F32,#8B4513)'; }
-  
   var el = document.getElementById('pangkatVIP');
   if (el) {
     el.textContent = emoji + ' ' + pangkat + ' MEMBER';
@@ -298,21 +796,15 @@ function updatePangkat() {
   }
 }
 
-// ==========================================
-// INIT
-// ==========================================
-async function init() {
+// ================== INIT ==================
+function init() {
   document.getElementById('namaPelajar').textContent = dataPelajar.nama;
-  document.getElementById('namaMesej').textContent = dataPelajar.nama;
   updatePangkat();
-  
-  await muatData();
-  
   binaButangTahun();
-  binaKotakSubjek(dataPelajar.tahunDipilih);
+  binaKotakSubjek(tahunSemasa);
 }
 
-init();
+window.onload = init;
 </script>
 
 </body>
