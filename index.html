@@ -280,4 +280,455 @@ function binaButangTahun() {
     (function(n) {
       var btn = document.createElement('button');
       btn.className = 'tahun-btn' + (n === tahunSemasa ? ' active' : '');
-      btn.textContent = '
+      btn.textContent = '🎒 TAHUN ' + n;
+      btn.onclick = function() { pilihTahun(n, btn); };
+      c.appendChild(btn);
+    })(i);
+  }
+}
+
+function pilihTahun(tahun, el) {
+  var bs = document.querySelectorAll('.tahun-btn');
+  for (var i = 0; i < bs.length; i++) bs[i].classList.remove('active');
+  el.classList.add('active');
+  tahunSemasa = tahun;
+  dataPelajar.tahunDipilih = tahun;
+  simpanData();
+  binaKotakSubjek(tahun);
+}
+
+function binaKotakSubjek(tahun) {
+  var container = document.getElementById('kotakSubjek');
+  var senarai = DATA['tahun' + tahun] || [];
+  container.innerHTML = '';
+  for (var i = 0; i < senarai.length; i++) {
+    (function(s) {
+      var a = document.createElement('div');
+      a.className = 'subjek-kotak';
+      a.style.borderColor = s.warna;
+      var html = '';
+      if (s.badge) html += '<span class="badge-baru">' + s.badge + '</span>';
+      html += '<div class="emoji">' + s.emoji + '</div>';
+      html += '<div class="nama" style="color:' + s.warna + '">' + s.nama + '</div>';
+      html += '<div class="info">' + s.info + '</div>';
+      a.innerHTML = html;
+      a.onclick = function() { bukaSubjek(tahun, s.id); };
+      container.appendChild(a);
+    })(senarai[i]);
+  }
+}
+
+function bukaSubjek(tahun, id) {
+  subjekSemasaId = id;
+  tabSemasa = 'buku';
+  semuaSoalan = [];
+  jawapanPelajar = {};
+  indeksSoalan = 0;
+  document.getElementById('page-menu').classList.remove('active');
+  document.getElementById('page-subjek').classList.add('active');
+  var subjek = NAMA_SUBJEK[id] || { nama: 'Subjek', emoji: '📚', info: '' };
+  document.getElementById('badgeTahun').textContent = 'TAHUN ' + tahun;
+  document.getElementById('namaSubjek').textContent = subjek.emoji + ' ' + subjek.nama;
+  document.getElementById('infoSubjek').textContent = '📚 ' + subjek.info;
+  document.title = subjek.nama + ' Tahun ' + tahun + ' - IQmal AI';
+  var tabs = document.querySelectorAll('.tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  tabs[0].classList.add('active');
+  var senaraiTopik = (TOPIK[id] && TOPIK[id][tahun]) || [];
+  var topikContainer = document.getElementById('topikList');
+  topikContainer.innerHTML = '';
+  if (senaraiTopik.length === 0) {
+    topikContainer.innerHTML = '<p style="color:#8ba3c7;font-size:13px;">Topik akan datang.</p>';
+    document.getElementById('contentBox').innerHTML = '<div style="text-align:center;padding:40px;color:#8ba3c7;">📚 Topik belum disediakan.</div>';
+    return;
+  }
+  for (var j = 0; j < senaraiTopik.length; j++) {
+    (function(t, idx) {
+      var btn = document.createElement('button');
+      btn.className = 'topik-btn' + (idx === 0 ? ' active' : '');
+      btn.textContent = t;
+      btn.onclick = function() { pilihTopik(t, btn); };
+      topikContainer.appendChild(btn);
+    })(senaraiTopik[j], j);
+  }
+  topikSemasa = senaraiTopik[0];
+  paparKandungan(tahun);
+  window.scrollTo(0, 0);
+}
+
+function balikMenu() {
+  document.getElementById('page-subjek').classList.remove('active');
+  document.getElementById('page-menu').classList.add('active');
+  document.title = '👑 IQmal AI — EDISI PREMIUM';
+  window.scrollTo(0, 0);
+}
+
+function pilihTopik(topik, el) {
+  var bs = document.querySelectorAll('.topik-btn');
+  for (var i = 0; i < bs.length; i++) bs[i].classList.remove('active');
+  el.classList.add('active');
+  topikSemasa = topik;
+  semuaSoalan = [];
+  jawapanPelajar = {};
+  indeksSoalan = 0;
+  paparKandungan(tahunSemasa);
+}
+
+function tukarTab(tab, el) {
+  var ts = document.querySelectorAll('.tab');
+  for (var i = 0; i < ts.length; i++) ts[i].classList.remove('active');
+  el.classList.add('active');
+  tabSemasa = tab;
+  paparKandungan(tahunSemasa);
+}
+
+function paparKandungan(tahun) {
+  var box = document.getElementById('contentBox');
+  var subjekNama = NAMA_SUBJEK[subjekSemasaId] ? NAMA_SUBJEK[subjekSemasaId].nama : subjekSemasaId;
+  if (tabSemasa === 'buku') janaNotaAI(box, tahun, subjekNama);
+  else if (tabSemasa === 'latihan') mulaLatihan(box, tahun, subjekNama);
+  else if (tabSemasa === 'video') paparVideo(tahun);
+}
+
+/* ================== NOTA AI ================== */
+async function janaNotaAI(box, tahun, subjekNama) {
+  var key = subjekSemasaId + '_' + tahun + '_' + topikSemasa;
+  if (cacheNota[key]) { box.innerHTML = '<div class="nota-content">' + cacheNota[key] + '</div>'; return; }
+  box.innerHTML = '<div style="text-align:center;padding:40px;color:#D4AF37;"><div style="display:inline-block;width:40px;height:40px;border:4px solid rgba(212,175,55,0.3);border-top-color:#D4AF37;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:15px;"></div><p style="font-weight:bold;">⏳ Cikgu AI sedang siapkan nota...</p><p style="color:#8ba3c7;font-size:12px;margin-top:8px;">Kali pertama lambat sikit (30-60 saat)</p></div>';
+  try {
+    var res = await fetch(BACKEND_URL + '/api/nota', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tahun: tahun, subjek: subjekNama, topik: topikSemasa })
+    });
+    var data = await res.json();
+    if (data.nota) {
+      cacheNota[key] = data.nota;
+      box.innerHTML = '<div class="nota-content">' + data.nota + '</div>';
+    } else {
+      box.innerHTML = '<div style="text-align:center;padding:40px;color:#ffcdd2;">❌ ' + (data.error || 'Ralat') + '<br><br><button onclick="paparKandungan(' + tahun + ')" style="margin-top:15px;padding:10px 20px;background:#D4AF37;color:#0a1929;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-family:inherit;">🔄 Cuba Lagi</button></div>';
+    }
+  } catch (err) {
+    box.innerHTML = '<div style="text-align:center;padding:40px;color:#ffcdd2;">❌ Ralat: ' + err.message + '<br><br><button onclick="paparKandungan(' + tahun + ')" style="margin-top:15px;padding:10px 20px;background:#D4AF37;color:#0a1929;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-family:inherit;">🔄 Cuba Lagi</button></div>';
+  }
+}
+
+/* ================== LATIHAN 100 SOALAN (TANPA HAD MASA) ================== */
+function mulaLatihan(box, tahun, subjekNama) {
+  if (semuaSoalan.length === 0) {
+    muatSoalanBaru(box, tahun, subjekNama);
+  } else {
+    paparSoalanSemasa();
+  }
+}
+
+async function muatSoalanBaru(box, tahun, subjekNama) {
+  if (sedangMuat) return;
+  sedangMuat = true;
+  
+  box.innerHTML =
+    '<div style="text-align:center;padding:40px;color:#D4AF37;">' +
+      '<div style="display:inline-block;width:40px;height:40px;border:4px solid rgba(212,175,55,0.3);border-top-color:#D4AF37;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:15px;"></div>' +
+      '<p style="font-weight:bold;">✏️ AI sedang siapkan soalan...</p>' +
+      '<p style="color:#8ba3c7;font-size:12px;margin-top:8px;">Sila tunggu sebentar</p>' +
+    '</div>';
+  
+  try {
+    var seed = Date.now() + Math.random() * 10000;
+    var res = await fetch(BACKEND_URL + '/api/latihan', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tahun: tahun, subjek: subjekNama, topik: topikSemasa, seed: seed })
+    });
+    var data = await res.json();
+    
+    if (data.teks) {
+      var soalanBaru = parseLatihan(data.teks);
+      if (soalanBaru.length > 0) {
+        semuaSoalan = semuaSoalan.concat(soalanBaru);
+        sedangMuat = false;
+        paparSoalanSemasa();
+      } else {
+        sedangMuat = false;
+        box.innerHTML = errorBox(tahun, '❌ AI tidak dapat jana soalan. Cuba lagi.');
+      }
+    } else {
+      sedangMuat = false;
+      box.innerHTML = errorBox(tahun, '❌ ' + (data.error || 'Ralat'));
+    }
+  } catch (err) {
+    sedangMuat = false;
+    box.innerHTML = errorBox(tahun, '❌ Ralat: ' + err.message);
+  }
+}
+
+function paparSoalanSemasa() {
+  var box = document.getElementById('contentBox');
+  
+  if (semuaSoalan.length === 0) {
+    box.innerHTML = '<p style="text-align:center;color:#8ba3c7;">Tiada soalan lagi.</p>';
+    return;
+  }
+  
+  var soalan = semuaSoalan[indeksSoalan];
+  if (!soalan) {
+    if (semuaSoalan.length < TARGET_SOALAN) {
+      var subjekNama = NAMA_SUBJEK[subjekSemasaId] ? NAMA_SUBJEK[subjekSemasaId].nama : subjekSemasaId;
+      muatSoalanBaru(box, tahunSemasa, subjekNama);
+      return;
+    } else {
+      paparTamatLatihan();
+      return;
+    }
+  }
+  
+  var peratus = Math.round((indeksSoalan / TARGET_SOALAN) * 100);
+  var progres = (indeksSoalan / TARGET_SOALAN) * 100;
+  
+  // Kira jumlah betul & salah dari jawapanPelajar
+  var betul = 0, salah = 0;
+  for (var k in jawapanPelajar) {
+    if (jawapanPelajar[k] === semuaSoalan[k].j) betul++;
+    else salah++;
+  }
+  
+  var html = '';
+  
+  // Progress bar
+  html += '<div style="background:rgba(212,175,55,0.1);border-radius:15px;padding:12px;margin-bottom:15px;border:1px solid rgba(212,175,55,0.3);">';
+  html += '<div style="display:flex;justify-content:space-between;color:#D4AF37;font-weight:bold;font-size:13px;margin-bottom:8px;flex-wrap:wrap;gap:5px;">';
+  html += '<span>📝 Soalan ' + (indeksSoalan + 1) + ' / ' + TARGET_SOALAN + '</span>';
+  html += '<span>✅ ' + betul + ' • ❌ ' + salah + '</span>';
+  html += '</div>';
+  html += '<div style="background:rgba(0,0,0,0.3);border-radius:10px;height:10px;overflow:hidden;">';
+  html += '<div style="height:100%;width:' + progres + '%;background:linear-gradient(90deg,#D4AF37,#FFD700);transition:width 0.5s;box-shadow:0 0 10px #D4AF37;"></div>';
+  html += '</div>';
+  html += '<div style="text-align:right;color:#8ba3c7;font-size:11px;margin-top:5px;">' + peratus + '% siap</div>';
+  html += '</div>';
+  
+  // Soalan
+  html += '<div class="soalan-box" id="soalan-semasa">';
+  html += '<div class="soalan-teks">' + soalan.s + '</div>';
+  var hurufList = ['A', 'B', 'C', 'D'];
+  var jawapanLama = jawapanPelajar[indeksSoalan];
+  for (var i = 0; i < hurufList.length; i++) {
+    var h = hurufList[i];
+    var kelasPilihan = 'pilihan';
+    if (jawapanLama) {
+      if (h === soalan.j) kelasPilihan += ' betul';
+      else if (h === jawapanLama) kelasPilihan += ' salah';
+    }
+    html += '<div class="' + kelasPilihan + '" onclick="jawabSemasa(\'' + h + '\', this)">';
+    html += '<span class="huruf">' + h + '</span> ' + soalan[h];
+    html += '</div>';
+  }
+  html += '<div class="feedback' + (jawapanLama ? (jawapanLama === soalan.j ? ' ok show' : ' no show') : '') + '" id="fb-semasa">';
+  if (jawapanLama) {
+    if (jawapanLama === soalan.j) html += '✅ Betul! Hebat! 🎉';
+    else html += '❌ Belum betul. Jawapan: ' + soalan.j + ' (' + soalan[soalan.j] + ')';
+  }
+  html += '</div>';
+  html += '</div>';
+  
+  // BUTANG PREV & NEXT (TIADA HAD MASA)
+  html += '<div class="nav-buttons">';
+  html += '<button class="btn-nav btn-prev" onclick="soalanSebelum()" ' + (indeksSoalan === 0 ? 'disabled' : '') + '>⬅️ Prev</button>';
+  if (indeksSoalan < semuaSoalan.length - 1 || semuaSoalan.length < TARGET_SOALAN) {
+    html += '<button class="btn-nav btn-next" onclick="soalanSeterus()">Next ➡️</button>';
+  } else {
+    html += '<button class="btn-nav btn-next" onclick="paparTamatLatihan()">🏁 Tamat</button>';
+  }
+  html += '</div>';
+  
+  // Butang Reset
+  if (indeksSoalan > 0 || semuaSoalan.length > 5) {
+    html += '<div style="text-align:center;margin-top:12px;">';
+    html += '<button onclick="resetLatihan()" style="background:linear-gradient(135deg,#555,#333);color:white;border:2px solid #D4AF37;padding:10px 20px;border-radius:12px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:12px;">🔄 Mula Semula dari Soalan 1</button>';
+    html += '</div>';
+  }
+  
+  box.innerHTML = html;
+}
+
+function jawabSemasa(huruf, el) {
+  // Jangan benarkan tukar jawapan
+  if (jawapanPelajar[indeksSoalan] !== undefined) return;
+  
+  var soalan = semuaSoalan[indeksSoalan];
+  if (!soalan) return;
+  
+  // Simpan jawapan
+  jawapanPelajar[indeksSoalan] = huruf;
+  
+  var box = document.getElementById('soalan-semasa');
+  var semuaPilihan = box.querySelectorAll('.pilihan');
+  var fb = document.getElementById('fb-semasa');
+  
+  for (var i = 0; i < semuaPilihan.length; i++) {
+    var p = semuaPilihan[i];
+    p.style.pointerEvents = 'none';
+    var h = p.querySelector('.huruf').textContent;
+    if (h === soalan.j) p.classList.add('betul');
+    else if (h === huruf && huruf !== soalan.j) p.classList.add('salah');
+  }
+  
+  if (huruf === soalan.j) {
+    fb.className = 'feedback ok show';
+    fb.innerHTML = '✅ Betul! Hebat! 🎉';
+  } else {
+    fb.className = 'feedback no show';
+    fb.innerHTML = '❌ Belum betul. Jawapan: ' + soalan.j + ' (' + soalan[soalan.j] + ')';
+  }
+  
+  // ❌ TIADA auto-next — anak tekan butang Next bila dah faham
+}
+
+function soalanSeterus() {
+  if (indeksSoalan < semuaSoalan.length - 1) {
+    indeksSoalan++;
+    paparSoalanSemasa();
+    window.scrollTo(0, 0);
+  } else {
+    // Hujung batch — muat lagi atau tamat
+    if (semuaSoalan.length < TARGET_SOALAN) {
+      var subjekNama = NAMA_SUBJEK[subjekSemasaId] ? NAMA_SUBJEK[subjekSemasaId].nama : subjekSemasaId;
+      muatSoalanBaru(document.getElementById('contentBox'), tahunSemasa, subjekNama);
+    } else {
+      paparTamatLatihan();
+    }
+  }
+}
+
+function soalanSebelum() {
+  if (indeksSoalan > 0) {
+    indeksSoalan--;
+    paparSoalanSemasa();
+    window.scrollTo(0, 0);
+  }
+}
+
+function paparTamatLatihan() {
+  var box = document.getElementById('contentBox');
+  var betul = 0, salah = 0;
+  for (var k in jawapanPelajar) {
+    if (jawapanPelajar[k] === semuaSoalan[k].j) betul++;
+    else salah++;
+  }
+  var jumlahDijawab = betul + salah;
+  var peratus = jumlahDijawab > 0 ? Math.round((betul / jumlahDijawab) * 100) : 0;
+  
+  var pujian = '';
+  var emoji = '🏆';
+  if (peratus >= 90) { pujian = 'CEMERLANG! 🌟'; emoji = '🏆'; }
+  else if (peratus >= 70) { pujian = 'BAGUS! 👍'; emoji = '🎉'; }
+  else if (peratus >= 50) { pujian = 'BOLEH LAGI! 💪'; emoji = '⭐'; }
+  else { pujian = 'JANGAN PUTUS ASA! 📖'; emoji = '🌱'; }
+  
+  var html = '';
+  html += '<div style="text-align:center;padding:30px;background:rgba(212,175,55,0.1);border:3px solid #D4AF37;border-radius:20px;">';
+  html += '<div style="font-size:70px;margin-bottom:15px;">' + emoji + '</div>';
+  html += '<h2 style="color:#D4AF37;margin-bottom:15px;font-size:22px;">🎊 TAMAT LATIHAN!</h2>';
+  html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;">';
+  html += '<div style="background:rgba(76,175,80,0.2);padding:12px;border-radius:12px;border:1px solid #4CAF50;">';
+  html += '<div style="color:#4CAF50;font-size:24px;font-weight:bold;">' + betul + '</div>';
+  html += '<div style="color:#8ba3c7;font-size:11px;">✅ BETUL</div>';
+  html += '</div>';
+  html += '<div style="background:rgba(229,57,53,0.2);padding:12px;border-radius:12px;border:1px solid #e53935;">';
+  html += '<div style="color:#e53935;font-size:24px;font-weight:bold;">' + salah + '</div>';
+  html += '<div style="color:#8ba3c7;font-size:11px;">❌ SALAH</div>';
+  html += '</div>';
+  html += '<div style="background:rgba(212,175,55,0.2);padding:12px;border-radius:12px;border:1px solid #D4AF37;">';
+  html += '<div style="color:#D4AF37;font-size:24px;font-weight:bold;">' + peratus + '%</div>';
+  html += '<div style="color:#8ba3c7;font-size:11px;">🏆 MARKAH</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '<p style="color:#D4AF37;font-size:18px;font-weight:bold;margin-bottom:20px;">' + pujian + '</p>';
+  html += '<button onclick="resetLatihan()" style="background:linear-gradient(135deg,#D4AF37,#B8860B);color:#0a1929;border:none;padding:15px 30px;border-radius:15px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:15px;box-shadow:0 4px 0 #8B6914;">🔄 CUBA LAGI</button>';
+  html += '</div>';
+  
+  box.innerHTML = html;
+}
+
+function resetLatihan() {
+  semuaSoalan = [];
+  jawapanPelajar = {};
+  indeksSoalan = 0;
+  var subjekNama = NAMA_SUBJEK[subjekSemasaId] ? NAMA_SUBJEK[subjekSemasaId].nama : subjekSemasaId;
+  muatSoalanBaru(document.getElementById('contentBox'), tahunSemasa, subjekNama);
+}
+
+function parseLatihan(teks) {
+  var soalan = [];
+  for (var i = 1; i <= 5; i++) {
+    var matchS = teks.match(new RegExp('SOALAN' + i + ':\\s*(.+)'));
+    if (matchS) {
+      var start = teks.indexOf('SOALAN' + i + ':');
+      var end = i < 5 ? teks.indexOf('SOALAN' + (i+1) + ':') : teks.length;
+      if (end === -1) end = teks.length;
+      var blok = teks.substring(start, end);
+      var a = blok.match(/A:\s*(.+)/);
+      var b = blok.match(/B:\s*(.+)/);
+      var c = blok.match(/C:\s*(.+)/);
+      var d = blok.match(/D:\s*(.+)/);
+      var j = blok.match(/JAWAPAN\d?:\s*([ABCD])/);
+      if (a && b && c && d && j) {
+        soalan.push({ s: matchS[1].trim(), A: a[1].trim(), B: b[1].trim(), C: c[1].trim(), D: d[1].trim(), j: j[1] });
+      }
+    }
+  }
+  return soalan;
+}
+
+function errorBox(tahun, mesej) {
+  return '<div style="text-align:center;padding:40px;color:#ffcdd2;">' +
+    mesej +
+    '<br><br><button onclick="paparKandungan(' + tahun + ')" style="margin-top:15px;padding:10px 20px;background:#D4AF37;color:#0a1929;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-family:inherit;">🔄 Cuba Lagi</button>' +
+    '</div>';
+}
+
+/* ================== VIDEO ================== */
+function paparVideo(tahun) {
+  var box = document.getElementById('contentBox');
+  var namaTopik = topikSemasa.toLowerCase().replace(/ /g, '-').replace(/&/g, 'dan');
+  var videoPath = 'video/' + subjekSemasaId + '/' + namaTopik + '.mp4';
+  box.innerHTML = '<div class="info-video"><div class="ikon">🎬</div><h3>Video: ' + topikSemasa + '</h3><p>Video untuk topik ini belum dimuatkan.</p><p style="color:#D4AF37;font-weight:bold;margin-top:15px;font-family:monospace;font-size:11px;">' + videoPath + '</p></div>';
+  var testVideo = document.createElement('video');
+  testVideo.src = videoPath;
+  testVideo.onloadedmetadata = function() {
+    box.innerHTML = '<div style="background:#000;border-radius:15px;overflow:hidden;border:3px solid #D4AF37;margin-bottom:15px;"><video controls playsinline style="width:100%;display:block;max-height:400px;"><source src="' + videoPath + '" type="video/mp4"></video></div>';
+  };
+}
+
+/* ================== TUKAR NAMA ================== */
+function tukarNama() {
+  var namaBaru = prompt('Siapa nama anda?', dataPelajar.nama);
+  if (namaBaru && namaBaru.trim()) {
+    dataPelajar.nama = namaBaru.trim();
+    simpanData();
+    document.getElementById('namaPelajar').textContent = namaBaru.trim();
+  }
+}
+
+function updatePangkat() {
+  var b = dataPelajar.bintang;
+  var pangkat, emoji, warna;
+  if (b >= 100) { pangkat = 'DIAMOND'; emoji = '💎'; warna = 'linear-gradient(135deg,#00CED1,#1E90FF)'; }
+  else if (b >= 50) { pangkat = 'GOLD'; emoji = '🥇'; warna = 'linear-gradient(135deg,#D4AF37,#B8860B)'; }
+  else if (b >= 20) { pangkat = 'SILVER'; emoji = '🥈'; warna = 'linear-gradient(135deg,#C0C0C0,#A9A9A9)'; }
+  else { pangkat = 'BRONZE'; emoji = '🥉'; warna = 'linear-gradient(135deg,#CD7F32,#8B4513)'; }
+  var el = document.getElementById('pangkatVIP');
+  if (el) { el.textContent = emoji + ' ' + pangkat + ' MEMBER'; el.style.background = warna; }
+}
+
+function init() {
+  document.getElementById('namaPelajar').textContent = dataPelajar.nama;
+  updatePangkat();
+  binaButangTahun();
+  binaKotakSubjek(tahunSemasa);
+}
+
+window.onload = init;
+</script>
+
+</body>
+</html>
