@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>👑 IQmal AI — EDISI PREMIUM</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+  body { background: linear-gradient(135deg,#0a1929 0%,#1a3a5c 50%,#0d2137 100%); min-height:100vh; padding:12px; overflow-x:hidden; }
+  .bintang { position:fixed; color:#FFD700; font-size:18px; animation:kelip 3s infinite; z-index:0; pointer-events:none; text-shadow:0 0 8px #FFD700; opacity:0.7; }
+  @keyframes kelip { 0%,100% { opacity:0.2; transform:scale(1); } 50% { opacity:0.8; transform:scale(1.3); } }
+  .container { max-width:950px; margin:auto; background:linear-gradient(135deg,#0d2137,#1a3a5c); border-radius:30px; padding:22px; box-shadow:0 0 0 3px #D4AF37,0 0 0 6px #8B6914,0 20px 60px rgba(0,0,0,0.6),0 0 80px rgba(212,175,55,0.15); position:relative; z-index:10; color:white; border:1px solid rgba(212,175,55,0.3); }
+  .mahkota { text-align:center; font-size:50px; animation:lompat 2s infinite; filter:drop-shadow(0 0 15px #D4AF37); }
+  @keyframes lompat { 0%,100% { transform:translateY(0) rotate(-5deg); } 50% { transform:translateY(-10px) rotate(5deg); } }
+  .tajuk { text-align:center; margin-bottom:15px; }
+  .tajuk h1 { color:#D4AF37; font-size:28px; text-shadow:0 0 10px rgba(212,175,55,0.8),0 0 20px rgba(212,175,55,0.4); letter-spacing:2px; margin-bottom:4px; }
+  .tajuk .sub { color:#D4AF37; font-size:12px; letter-spacing:3px; opacity:0.8; }
+  .badge-premium { display:inline-block; background:linear-gradient(135deg,#D4AF37,#B8860B); color:#0a1929; padding:5px 16px; border-radius:20px; font-weight:bold; font-size:11px; letter-spacing:2px; box-shadow:0 0 15px rgba(212,175,55,0.5); margin-bottom:12px; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+  .kad-vip { background:linear-gradient(135deg,#1a3a5c,#0d2137); border:2px solid #D4AF37; border-radius:20px; padding:12px 18px; margin-bottom:15px; display:flex; align-items:center; gap:15px; box-shadow:0 0 20px rgba(212,175,55,0.2); }
+  .kad-vip .avatar { width:70px; height:70px; border-radius:50%; overflow:hidden; border:3px solid #D4AF37; box-shadow:0 0 15px rgba(212,175,55,0.6); flex-shrink:0; display:flex; align-items:center; justify-content:center; background:#0d2137; font-size:40px; }
+  .kad-vip .avatar img { width:100%; height:100%; object-fit:cover; display:block; }
+  .kad-vip .info { flex:1; }
+  .kad-vip .label { color:#D4AF37; font-size:10px; letter-spacing:2px; font-weight:bold; }
+  .kad-vip .nama { color:white; font-size:22px; font-weight:bold; text-shadow:0 0 8px rgba(212,175,55,0.5); }
+  .kad-vip .pangkat { display:inline-block; background:linear-gradient(135deg,#CD7F32,#8B4513); color:white; padding:3px 12px; border-radius:10px; font-size:10px; font-weight:bold; margin-top:4px; }
+  .btn-tukar { background:linear-gradient(135deg,#D4AF37,#B8860B); color:#0a1929; border:none; padding:8px 12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:16px; font-family:inherit; }
+  .pilih-tahun { background:linear-gradient(135deg,#1a3a5c,#0d2137); border:2px solid #D4AF37; border-radius:20px; padding:15px; margin-bottom:20px; text-align:center; box-shadow:0 0 15px rgba(212,175,55,0.15); }
+  .pilih-tahun p { color:#D4AF37; font-size:13px; font-weight:bold; letter-spacing:2px; margin-bottom:12px; }
+  .tahun-buttons { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .tahun-btn { background:linear-gradient(135deg,#0d2137,#1a3a5c); border:2px solid #4a6fa5; color:#8ba3c7; padding:10px 16px; border-radius:15px; font-weight:bold; font-size:14px; cursor:pointer; font-family:inherit; transition:0.2s; letter-spacing:1px; }
+  .tahun-btn:hover { border-color:#D4AF37; color:#D4AF37; transform:translateY(-2px); }
+  .tahun-btn.active { background:linear-gradient(135deg,#D4AF37,#B8860B); color:#0a1929; border-color:#D4AF37; box-shadow:0 0 20px rgba(212,175,55,0.6); }
+  .kotak-subjek { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px; margin-bottom:20px; }
+  .subjek-kotak { background:linear-gradient(135deg,#0d2137,#1a3a5c); border:3px solid; border-radius:22px; padding:20px 12px; text-align:center; cursor:pointer; transition:0.25s; text-decoration:none; color:white; display:flex; flex-direction:column; align-items:center; gap:8px; box-shadow:0 6px 0 rgba(0,0,0,0.4),0 0 15px rgba(212,175,55,0.15); position:relative; overflow:hidden; }
+  .subjek-kotak:hover { transform:translateY(-5px); box-shadow:0 10px 0 rgba(0,0,0,0.4),0 0 30px rgba(212,175,55,0.4); }
+  .subjek-kotak .emoji { font-size:48px; animation:lompat 3s infinite; }
+  .subjek-kotak .nama { font-size:14px; font-weight:bold; letter-spacing:1px; line-height:1.3; }
+  .subjek-kotak .info { color:#8ba3c7; font-size:10px; letter-spacing:1px; }
+  .subjek-kotak .badge-baru { position:absolute; top:8px; right:8px; background:linear-gradient(135deg,#FF1493,#C71585); color:white; font-size:9px; padding:2px 8px; border-radius:8px; font-weight:bold; letter-spacing:1px; animation:pulse 2s infinite; }
+  .mesej { background:linear-gradient(135deg,#1a3a5c,#0d2137); border:2px solid #D4AF37; border-radius:20px; padding:18px; text-align:center; box-shadow:0 0 20px rgba(212,175,55,0.15); }
+  .mesej .ikon { font-size:45px; margin-bottom:8px; filter:drop-shadow(0 0 10px #D4AF37); }
+  .mesej h3 { color:#D4AF37; font-size:16px; margin-bottom:8px; letter-spacing:1px; }
+  .mesej p { color:#8ba3c7; font-size:12px; line-height:1.7; }
+  .mesej .highlight { color:#D4AF37; font-weight:bold; }
+  @media (max-width:600px) {
+    .tajuk h1 { font-size:22px; }
+    .kotak-subjek { grid-template-columns:repeat(2,1fr); gap:10px; }
+    .subjek-kotak { padding:15px 8px; }
+    .subjek-kotak .emoji { font-size:36px; }
+    .subjek-kotak .nama { font-size:12px; }
+    .kad-vip .avatar { width:55px; height:55px; font-size:30px; }
+    .kad-vip .nama { font-size:18px; }
+    .tahun-btn { padding:8px 12px; font-size:12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bintang" style="top:5%; left:10%;">⭐</div>
+<div class="bintang" style="top:15%; left:80%; animation-delay:0.5s;">✨</div>
+<div class="bintang" style="top:50%; left:5%; animation-delay:1s;">⭐</div>
+<div class="bintang" style="top:75%; left:90%; animation-delay:1.5s;">✨</div>
+
+<div class="container">
+
+  <div class="mahkota">👑</div>
+  
+  <div class="tajuk">
+    <div class="badge-premium">💎 EDISI PREMIUM VIP</div>
+    <h1>IQmal AI</h1>
+    <p class="sub">✦ TAHUN 1 — TAHUN 6 ✦</p>
+  </div>
+
+  <div class="kad-vip">
+    <div class="avatar" id="avatarVIP">
+      <img src="iqmal.jpg" alt="IQmal" onerror="this.style.display='none'; this.parentElement.innerHTML='🧒';">
+    </div>
+    <div class="info">
+      <div class="label">👑 AHLI VIP</div>
+      <div class="nama" id="namaPelajar">IQmal</div>
+      <span class="pangkat" id="pangkatVIP">🥉 BRONZE MEMBER</span>
+    </div>
+    <button class="btn-tukar" onclick="tukarNama()">✏️</button>
+  </div>
+
+  <div class="pilih-tahun">
+    <p>📅 PILIH TAHUN ANDA</p>
+    <div class="tahun-buttons" id="tahunButtons"></div>
+  </div>
+
+  <p style="color:#D4AF37;font-size:13px;font-weight:bold;letter-spacing:2px;text-align:center;margin-bottom:12px;">
+    👇 KLIK KOTAK SUBJEK 👇
+  </p>
+
+  <div class="kotak-subjek" id="kotakSubjek"></div>
+
+  <div class="mesej">
+    <div class="ikon">💎</div>
+    <h3><span id="namaMesej">IQmal</span> AHLI VIP ISTIMEWA</h3>
+    <p>Setiap kotak ada <span class="highlight">Buku Teks AI + Latihan AI + Video</span>.</p>
+    <p>Belajar ikut <span class="highlight">tahap tahun anda</span> ya! 🎯</p>
+  </div>
+
+</div>
+
+<script>
+// ==========================================
+// KONFIGURASI
+// ==========================================
+var DATA_SUBJEK = null;
+
+// ==========================================
+// DATA PELAJAR
+// ==========================================
+var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v2') || '{}');
+if (!dataPelajar.nama) dataPelajar.nama = 'IQmal';
+if (!dataPelajar.bintang) dataPelajar.bintang = 0;
+if (!dataPelajar.tahunDipilih) dataPelajar.tahunDipilih = 1;
+
+function simpanData() {
+  localStorage.setItem('iqmalAI_v2', JSON.stringify(dataPelajar));
+}
+
+// ==========================================
+// TUKAR NAMA
+// ==========================================
+function tukarNama() {
+  var namaBaru = prompt('Siapa nama anda?', dataPelajar.nama);
+  if (namaBaru && namaBaru.trim()) {
+    dataPelajar.nama = namaBaru.trim();
+    simpanData();
+    document.getElementById('namaPelajar').textContent = namaBaru.trim();
+    document.getElementById('namaMesej').textContent = namaBaru.trim();
+    alert('✅ Nama ditukar jadi: ' + namaBaru.trim());
+  }
+}
+
+// ==========================================
+// MUAT DATA JSON
+// ==========================================
+async function muatData() {
+  try {
+    var res = await fetch('data.json');
+    var json = await res.json();
+    DATA_SUBJEK = json.subjek;
+    return true;
+  } catch (err) {
+    // Fallback: data terbina dalam
+    DATA_SUBJEK = {
+      "tahun1": [
+        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 1-100" },
+        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Sukukata" },
+        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "ABC, Colours" },
+        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Anggota Badan" },
+        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Rukun Islam" },
+        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Warna" },
+        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Irama" },
+        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Pergerakan" }
+      ],
+      "tahun2": [
+        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 1,000" },
+        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Ayat Mudah" },
+        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Numbers" },
+        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Manusia" },
+        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Solat" },
+        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Bentuk" },
+        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Melodi" },
+        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Permainan" }
+      ],
+      "tahun3": [
+        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 10,000" },
+        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Karangan" },
+        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Tenses" },
+        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Tenaga" },
+        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Ibadah" },
+        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Kolaj" },
+        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Notasi" },
+        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Kecergasan" }
+      ],
+      "tahun4": [
+        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 100,000", "badge": "BARU" },
+        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Ringkasan" },
+        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Writing" },
+        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Fotosintesis" },
+        { "id": "sejarah", "nama": "Sejarah", "emoji": "📜", "warna": "#CD7F32", "info": "Melaka", "badge": "BARU" },
+        { "id": "rbt", "nama": "RBT", "emoji": "🛠️", "warna": "#D4AF37", "info": "Reka Bentuk", "badge": "BARU" },
+        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Akidah" },
+        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Catan" },
+        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Lagu Rakyat" },
+        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Sukan" }
+      ],
+      "tahun5": [
+        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "Nombor 1,000,000" },
+        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "Karangan" },
+        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "Literature" },
+        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "Sistem Badan" },
+        { "id": "sejarah", "nama": "Sejarah", "emoji": "📜", "warna": "#CD7F32", "info": "Kemerdekaan" },
+        { "id": "rbt", "nama": "RBT", "emoji": "🛠️", "warna": "#D4AF37", "info": "Projek" },
+        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "Ibadah" },
+        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Arca" },
+        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Lagu Tradisional" },
+        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Sukan" }
+      ],
+      "tahun6": [
+        { "id": "matematik", "nama": "Matematik", "emoji": "🔢", "warna": "#4facfe", "info": "UPSR", "badge": "UPSR" },
+        { "id": "bm", "nama": "Bahasa Melayu", "emoji": "🇲🇾", "warna": "#FF69B4", "info": "UPSR", "badge": "UPSR" },
+        { "id": "bi", "nama": "Bahasa Inggeris", "emoji": "🇬🇧", "warna": "#FFA500", "info": "UPSR", "badge": "UPSR" },
+        { "id": "sains", "nama": "Sains", "emoji": "🔬", "warna": "#4CAF50", "info": "UPSR", "badge": "UPSR" },
+        { "id": "sejarah", "nama": "Sejarah", "emoji": "📜", "warna": "#CD7F32", "info": "UPSR", "badge": "UPSR" },
+        { "id": "rbt", "nama": "RBT", "emoji": "🛠️", "warna": "#D4AF37", "info": "Projek" },
+        { "id": "islam", "nama": "Pendidikan Islam", "emoji": "🕌", "warna": "#00CED1", "info": "UPSR", "badge": "UPSR" },
+        { "id": "seni", "nama": "Seni Visual", "emoji": "🎨", "warna": "#FF6B9D", "info": "Projek" },
+        { "id": "muzik", "nama": "Muzik", "emoji": "🎵", "warna": "#BA55D3", "info": "Projek" },
+        { "id": "pjk", "nama": "PJK", "emoji": "⚽", "warna": "#FF4500", "info": "Sukan" }
+      ]
+    };
+    return true;
+  }
+}
+
+// ==========================================
+// BINA BUTANG TAHUN
+// ==========================================
+function binaButangTahun() {
+  var container = document.getElementById('tahunButtons');
+  container.innerHTML = '';
+  
+  for (var i = 1; i <= 6; i++) {
+    (function(nombor) {
+      var btn = document.createElement('button');
+      btn.className = 'tahun-btn' + (nombor === dataPelajar.tahunDipilih ? ' active' : '');
+      btn.textContent = '🎒 TAHUN ' + nombor;
+      btn.onclick = function() { pilihTahun(nombor, btn); };
+      container.appendChild(btn);
+    })(i);
+  }
+}
+
+// ==========================================
+// PILIH TAHUN
+// ==========================================
+function pilihTahun(tahun, el) {
+  var buttons = document.querySelectorAll('.tahun-btn');
+  for (var i = 0; i < buttons.length; i++) buttons[i].classList.remove('active');
+  el.classList.add('active');
+  dataPelajar.tahunDipilih = tahun;
+  simpanData();
+  binaKotakSubjek(tahun);
+}
+
+// ==========================================
+// BINA KOTAK SUBJEK
+// ==========================================
+function binaKotakSubjek(tahun) {
+  var container = document.getElementById('kotakSubjek');
+  var key = 'tahun' + tahun;
+  var senarai = (DATA_SUBJEK && DATA_SUBJEK[key]) || [];
+  
+  container.innerHTML = '';
+  
+  for (var i = 0; i < senarai.length; i++) {
+    var s = senarai[i];
+    var a = document.createElement('a');
+    a.href = 'subjek.html?tahun=' + tahun + '&id=' + s.id;
+    a.className = 'subjek-kotak';
+    a.style.borderColor = s.warna;
+    
+    var html = '';
+    if (s.badge) {
+      html += '<span class="badge-baru">' + s.badge + '</span>';
+    }
+    html += '<div class="emoji">' + s.emoji + '</div>';
+    html += '<div class="nama" style="color:' + s.warna + '">' + s.nama + '</div>';
+    html += '<div class="info">' + s.info + '</div>';
+    
+    a.innerHTML = html;
+    container.appendChild(a);
+  }
+}
+
+// ==========================================
+// PANGKAT
+// ==========================================
+function updatePangkat() {
+  var b = dataPelajar.bintang;
+  var pangkat, emoji, warna;
+  
+  if (b >= 100) { pangkat = 'DIAMOND'; emoji = '💎'; warna = 'linear-gradient(135deg,#00CED1,#1E90FF)'; }
+  else if (b >= 50) { pangkat = 'GOLD'; emoji = '🥇'; warna = 'linear-gradient(135deg,#D4AF37,#B8860B)'; }
+  else if (b >= 20) { pangkat = 'SILVER'; emoji = '🥈'; warna = 'linear-gradient(135deg,#C0C0C0,#A9A9A9)'; }
+  else { pangkat = 'BRONZE'; emoji = '🥉'; warna = 'linear-gradient(135deg,#CD7F32,#8B4513)'; }
+  
+  var el = document.getElementById('pangkatVIP');
+  if (el) {
+    el.textContent = emoji + ' ' + pangkat + ' MEMBER';
+    el.style.background = warna;
+  }
+}
+
+// ==========================================
+// INIT
+// ==========================================
+async function init() {
+  document.getElementById('namaPelajar').textContent = dataPelajar.nama;
+  document.getElementById('namaMesej').textContent = dataPelajar.nama;
+  updatePangkat();
+  
+  await muatData();
+  
+  binaButangTahun();
+  binaKotakSubjek(dataPelajar.tahunDipilih);
+}
+
+init();
+</script>
+
+</body>
+</html>
