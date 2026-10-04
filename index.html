@@ -66,6 +66,30 @@
   .feedback.show { display:block; }
   .feedback.ok { background:rgba(76,175,80,0.2); border:1px solid #4CAF50; color:#c8f7c5; }
   .feedback.no { background:rgba(229,57,53,0.2); border:1px solid #e53935; color:#ffcdd2; }
+  
+  /* BUTANG NEXT & PREV */
+  .nav-buttons { display:flex; gap:10px; margin-top:15px; flex-wrap:wrap; }
+  .btn-nav {
+    flex:1;
+    min-width:120px;
+    padding:14px 20px;
+    border-radius:15px;
+    font-weight:bold;
+    font-size:15px;
+    cursor:pointer;
+    font-family:inherit;
+    border:3px solid #D4AF37;
+    transition:0.2s;
+    box-shadow:0 4px 0 #8B6914;
+    letter-spacing:1px;
+  }
+  .btn-nav:hover { transform:translateY(-2px); box-shadow:0 6px 0 #8B6914; }
+  .btn-nav:active { transform:translateY(3px); box-shadow:0 1px 0 #8B6914; }
+  .btn-prev { background:linear-gradient(135deg,#1a3a5c,#0d2137); color:#D4AF37; }
+  .btn-next { background:linear-gradient(135deg,#D4AF37,#B8860B); color:#0a1929; }
+  .btn-nav:disabled { opacity:0.4; cursor:not-allowed; transform:none; box-shadow:0 4px 0 #555; }
+  .btn-nav:disabled:hover { transform:none; }
+  
   .info-video { text-align:center; padding:40px 20px; background:rgba(212,175,55,0.05); border:2px dashed rgba(212,175,55,0.3); border-radius:15px; }
   .info-video .ikon { font-size:60px; margin-bottom:15px; }
   .info-video h3 { color:#D4AF37; margin-bottom:10px; font-size:17px; }
@@ -236,20 +260,18 @@ var cacheNota = {};
 
 // Sistem latihan 100 soalan
 var semuaSoalan = [];
+var jawapanPelajar = {};  // Simpan jawapan pelajar {indeks: huruf}
 var indeksSoalan = 0;
-var jumlahBetul = 0;
-var jumlahSalah = 0;
-var sudahJawab = {};
 var TARGET_SOALAN = 100;
 var sedangMuat = false;
 
-var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v10') || '{}');
+var dataPelajar = JSON.parse(localStorage.getItem('iqmalAI_v11') || '{}');
 if (!dataPelajar.nama) dataPelajar.nama = 'IQmal';
 if (!dataPelajar.bintang) dataPelajar.bintang = 0;
 if (!dataPelajar.tahunDipilih) dataPelajar.tahunDipilih = 1;
 tahunSemasa = dataPelajar.tahunDipilih;
 
-function simpanData() { localStorage.setItem('iqmalAI_v10', JSON.stringify(dataPelajar)); }
+function simpanData() { localStorage.setItem('iqmalAI_v11', JSON.stringify(dataPelajar)); }
 
 function binaButangTahun() {
   var c = document.getElementById('tahunButtons');
@@ -258,43 +280,4 @@ function binaButangTahun() {
     (function(n) {
       var btn = document.createElement('button');
       btn.className = 'tahun-btn' + (n === tahunSemasa ? ' active' : '');
-      btn.textContent = '🎒 TAHUN ' + n;
-      btn.onclick = function() { pilihTahun(n, btn); };
-      c.appendChild(btn);
-    })(i);
-  }
-}
-
-function pilihTahun(tahun, el) {
-  var bs = document.querySelectorAll('.tahun-btn');
-  for (var i = 0; i < bs.length; i++) bs[i].classList.remove('active');
-  el.classList.add('active');
-  tahunSemasa = tahun;
-  dataPelajar.tahunDipilih = tahun;
-  simpanData();
-  binaKotakSubjek(tahun);
-}
-
-function binaKotakSubjek(tahun) {
-  var container = document.getElementById('kotakSubjek');
-  var senarai = DATA['tahun' + tahun] || [];
-  container.innerHTML = '';
-  for (var i = 0; i < senarai.length; i++) {
-    (function(s) {
-      var a = document.createElement('div');
-      a.className = 'subjek-kotak';
-      a.style.borderColor = s.warna;
-      var html = '';
-      if (s.badge) html += '<span class="badge-baru">' + s.badge + '</span>';
-      html += '<div class="emoji">' + s.emoji + '</div>';
-      html += '<div class="nama" style="color:' + s.warna + '">' + s.nama + '</div>';
-      html += '<div class="info">' + s.info + '</div>';
-      a.innerHTML = html;
-      a.onclick = function() { bukaSubjek(tahun, s.id); };
-      container.appendChild(a);
-    })(senarai[i]);
-  }
-}
-
-function bukaSubjek(tahun, id) {
-  subjekSemasaId = id;
+      btn.textContent = '
